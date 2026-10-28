@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050807">
+<title>Sensi Z | Free Fire</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap');
+
+:root {
+  --neon: #39ff14;
+  --green: #00ff88;
+  --bg: #050807;
+  --card: #0b1210;
+  --text: #effff3;
+  --muted: #82958a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background:
+    radial-gradient(ellipse at 50% 0%, #10321b 0%, transparent 43%),
+    var(--bg);
+  color: var(--text);
+  font-family: 'Rajdhani', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  opacity: .14;
+  background-image:
+    linear-gradient(#39ff1410 1px, transparent 1px),
+    linear-gradient(90deg, #39ff1410 1px, transparent 1px);
+  background-size: 35px 35px;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 7%;
+  background: #050807eF;
+  border-bottom: 1px solid #39ff1433;
+  backdrop-filter: blur(16px);
+}
+
+.logo {
+  font: 900 25px 'Orbitron', sans-serif;
+  color: var(--neon);
+  letter-spacing: 2px;
+  text-shadow: 0 0 18px #39ff1480;
+  animation: logoPulse 3s infinite;
+}
+
+.logo span { color: white; }
+
+.header-tag {
+  font-size: 13px;
+  color: var(--green);
+  letter-spacing: 2px;
+}
+
+main {
+  width: min(950px, 92%);
+  margin: auto;
+}
+
+.hero {
+  text-align: center;
+  padding: 65px 0 35px;
+  animation: appear .8s ease both;
+}
+
+.pill {
+  display: inline-block;
+  border: 1px solid #39ff1460;
+  color: var(--neon);
+  background: #39ff140b;
+  border-radius: 30px;
+  padding: 7px 16px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  margin-bottom: 22px;
+}
+
+h1 {
+  font: 900 clamp(36px, 8vw, 72px) 'Orbitron', sans-serif;
+  line-height: 1.15;
+  letter-spacing: -2px;
+}
+
+h1 span {
+  color: var(--neon);
+  text-shadow: 0 0 30px #39ff1455;
+}
+
+.hero p {
+  max-width: 520px;
+  margin: 18px auto 0;
+  color: #a6b8ad;
+  font-size: 19px;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.stat {
+  border: 1px solid #39ff142b;
+  background: #0b1210b0;
+  border-radius: 10px;
+  padding: 9px 17px;
+  color: #c8d9cd;
+  font-size: 14px;
+}
+
+.stat strong { color: var(--neon); }
+
+.panel {
+  background: linear-gradient(145deg, #101a14, #080d0b);
+  border: 1px solid #39ff1445;
+  border-radius: 20px;
+  padding: clamp(18px, 4vw, 32px);
+  margin: 25px 0;
+  box-shadow: 0 0 45px #39ff1408;
+  animation: appear .8s ease both;
+}
+
+.section-title {
+  font: 700 18px 'Orbitron', sans-serif;
+  margin-bottom: 20px;
+}
+
+.section-title span { color: var(--neon); }
+
+label {
+  display: block;
+  color: #c1d1c6;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.search-wrap { position: relative; }
+
+.search-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  pointer-events: none;
+}
+
+input, select {
+  width: 100%;
+  background: #050907;
+  color: white;
+  border: 1px solid #304637;
+  border-radius: 10px;
+  padding: 14px;
+  font: 500 17px 'Rajdhani', sans-serif;
+  outline: none;
+  transition: .25s;
+}
+
+input { padding-left: 45px; }
+
+input:focus, select:focus {
+  border-color: var(--neon);
+  box-shadow: 0 0 14px #39ff1420;
+}
+
+select { cursor: pointer; }
+
+select option { background: #0b1210; }
+
+.device-results {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.device {
+  text-align: left;
+  background: #101913;
+  color: #cbd8ce;
+  border: 1px solid #263c2c;
+  border-radius: 9px;
+  padding: 12px;
+  font: 600 15px 'Rajdhani', sans-serif;
+  cursor: pointer;
+  transition: transform .25s, border-color .25s,
+              color .25s, background .25s;
+  animation: appear .35s ease both;
+  overflow-wrap: anywhere;
+}
+
+.device:hover {
+  transform: translateY(-3px) scale(1.015);
+  border-color: var(--neon);
+  color: var(--neon);
+  background: #14231a;
+  box-shadow: 0 0 15px #39ff1418;
+}
+
+.device.active {
+  border-color: var(--neon);
+  color: var(--neon);
+  background: #17321b;
+  box-shadow: inset 0 0 15px #39ff1410;
+}
+
+.device small {
+  display: block;
+  color: #778c7d;
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+.empty {
+  color: #a6b8ad;
+  grid-column: 1 / -1;
+  padding: 15px 0;
+}
+
+.field { margin-top: 22px; }
+
+.field-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.dpi-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.dpi-option {
+  background: #080e0a;
+  color: #b8c8bc;
+  border: 1px solid #304637;
+  border-radius: 10px;
+  padding: 14px 8px;
+  cursor: pointer;
+  font: 700 16px 'Rajdhani', sans-serif;
+  transition: .25s;
+}
+
+.dpi-option:hover { border-color: var(--green); }
+
+.dpi-option.active {
+  background: #15351d;
+  color: var(--neon);
+  border-color: var(--neon);
+  box-shadow: 0 0 15px #39ff141a;
+}
+
+.primary-btn {
+  width: 100%;
+  margin-top: 25px;
+  border: 1px solid var(--neon);
+  border-radius: 10px;
+  padding: 17px;
+  color: #031006;
+  background: var(--neon);
+  font: 900 16px 'Orbitron', sans-serif;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: 0 0 22px #39ff1425;
+  transition: transform .2s, box-shadow .2s, background .2s;
+}
+
+.primary-btn:hover {
+  transform: translateY(-3px);
+  background: #75ff5d;
+  box-shadow: 0 0 32px #39ff1460;
+}
+
+.primary-btn:active { transform: scale(.97); }
+
+.result {
+  display: none;
+}
+
+.result.show {
+  display: block;
+  animation: appear .55s ease both;
+}
+
+.result-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.result-heading h2 {
+  font: 700 19px 'Orbitron', sans-serif;
+  color: var(--neon);
+}
+
+.tag {
+  border: 1px solid #39ff1455;
+  color: var(--neon);
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.result-device {
+  color: #c0d2c5;
+  margin-bottom: 20px;
+  font-size: 17px;
+}
+
+.sensi-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.sensi-card {
+  border: 1px solid #253c2b;
+  border-radius: 12px;
+  background: #070c09;
+  padding: 17px;
+  transition: .25s;
+}
+
+.sensi-card:hover {
+  border-color: #39ff1480;
+  transform: translateY(-2px);
+}
+
+.sensi-card span {
+  color: #a1b4a6;
+  font-size: 15px;
+}
+
+.sensi-card strong {
+  display: block;
+  color: var(--neon);
+  font: 800 clamp(24px, 5vw, 34px) 'Orbitron', sans-serif;
+  margin-top: 10px;
+  animation: numberIn .4s ease both;
+}
+
+.dpi-box {
+  display: none;
+  margin-top: 12px;
+  padding: 18px;
+  background: #14291a;
+  border: 1px solid #39ff1455;
+  border-radius: 12px;
+}
+
+.dpi-box.show {
+  display: block;
+  animation: appear .4s ease;
+}
+
+.dpi-box strong {
+  color: var(--neon);
+  font: 800 27px 'Orbitron', sans-serif;
+}
+
+.dpi-box p {
+  color: #a6b8ad;
+  font-size: 14px;
+  margin-top: 6px;
+}
+
+.note {
+  color: #839789;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-top: 18px;
+}
+
+.secondary-btn {
+  width: 100%;
+  background: transparent;
+  border: 1px solid #39ff1470;
+  border-radius: 10px;
+  color: var(--neon);
+  padding: 14px;
+  margin-top: 12px;
+  font: 700 14px 'Orbitron', sans-serif;
+  cursor: pointer;
+  transition: .25s;
+}
+
+.secondary-btn:hover {
+  background: #39ff1418;
+  box-shadow: 0 0 20px #39ff1420;
+  transform: translateY(-2px);
+}
+
+footer {
+  margin-top: 55px;
+  padding: 40px 20px;
+  text-align: center;
+  border-top: 1px solid #39ff142b;
+  background: #030605;
+}
+
+.footer-logo {
+  font: 900 24px 'Orbitron', sans-serif;
+  color: var(--neon);
+}
+
+.slogan {
+  font: 700 clamp(17px, 4vw, 23px) 'Orbitron', sans-serif;
+  margin-top: 15px;
+  color: white;
+}
+
+.slogan span { color: var(--neon); }
+
+footer p {
+  margin-top: 15px;
+  color: #718578;
+  font-size: 14px;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes numberIn {
+  from { opacity: 0; transform: scale(.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes logoPulse {
+  0%, 100% { text-shadow: 0 0 10px #39ff1440; }
+  50% { text-shadow: 0 0 23px #39ff1490; }
+}
+
+@media (max-width: 540px) {
+  header { padding: 14px 5%; }
+  .logo { font-size: 21px; }
+  .header-tag { font-size: 10px; }
+  .hero { padding-top: 48px; }
+  .device-results { grid-template-columns: 1fr 1fr; }
+  .field-grid { grid-template-columns: 1fr; gap: 0; }
+  .sensi-grid { gap: 9px; }
+  .sensi-card { padding: 13px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">SENSI <span>Z</span></div>
+  <div class="header-tag">● FREE FIRE</div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="pill">⚡ GENERADOR GAMER</div>
+    <h1>DOMINA CON<br><span>SENSI Z</span></h1>
+    <p>Encuentra tu próxima sensibilidad. Elige tu celular, configura tu estilo y genera una nueva combinación.</p>
+
+    <div class="stats">
+      <div class="stat">🎯 <strong>3</strong> estilos</div>
+      <div class="stat">📱 <strong>+80</strong> modelos</div>
+      <div class="stat">♻️ <strong>∞</strong> generaciones</div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="section-title"><span>01.</span> ELIGE TU DISPOSITIVO</div>
+
+    <label for="search">Busca tu marca o modelo</label>
+    <div class="search-wrap">
+      <span class="search-icon">⌕</span>
+      <input id="search" type="search"
+        placeholder="Ej. Redmi Note 13, iPhone 15..."
+        autocomplete="off">
+    </div>
+
+    <div class="device-results" id="devices"></div>
+
+    <div class="field">
+      <label for="brand">Filtrar por marca</label>
+      <select id="brand">
+        <option value="Todas">Todas las marcas</option>
+      </select>
+    </div>
+
+    <div class="field-grid">
+      <div class="field">
+        <label for="style">Estilo de sensibilidad</label>
+        <select id="style">
+          <option value="Alta">🔥 Alta</option>
+          <option value="Media" selected>⚡ Media</option>
+          <option value="Baja">🎯 Baja</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Configuración DPI</label>
+        <div class="dpi-options">
+          <button class="dpi-option active" data-dpi="no"
+            type="button">Sin DPI</button>
+          <button class="dpi-option" data-dpi="si"
+            type="button">Con DPI</button>
+        </div>
+      </div>
+    </div>
+
+    <button class="primary-btn" id="generate" type="button">
+      ⚡ GENERAR SENSIBILIDAD
+    </button>
+  </section>
+
+  <section class="panel result" id="result" aria-live="polite">
+    <div class="result-heading">
+      <h2>✦ TU CONFIGURACIÓN</h2>
+      <span class="tag" id="resultStyle">ESTILO MEDIO</span>
+    </div>
+
+    <p class="result-device" id="resultDevice"></p>
+
+    <div class="sensi-grid" id="sensiGrid"></div>
+
+    <div class="dpi-box" id="dpiBox">
+      <span>📲 DPI sugerido (Android)</span>
+      <br><br>
+      <strong id="dpiValue"></strong>
+      <p>Es una sugerencia orientativa. Comprueba la compatibilidad y anota tu valor original antes de cambiar los ajustes del sistema.</p>
+    </div>
+
+    <p class="note">
+      Esta combinación se genera aleatoriamente. Pruébala en el campo de entrenamiento y ajusta los valores según tu pantalla, controles y comodidad.
+    </p>
+
+    <button class="secondary-btn" id="again" type="button">
+      ↻ GENERAR OTRA SENSIBILIDAD
+    </button>
+
+    <button class="secondary-btn" id="copy" type="button">
+      ▣ COPIAR CONFIGURACIÓN
+    </button>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-logo">SENSI Z</div>
+  <div class="slogan">JUEGA <span>LEGAL</span>,<br>ES MÁS DIVERTIDO 💚</div>
+  <p>Herramienta independiente para jugadores de Free Fire.</p>
+  <p>No afiliada ni respaldada oficialmente por Garena.</p>
+</footer>
+
+<script>
+const devicesData = {
+  "Samsung": [
+    "Galaxy A05", "Galaxy A05s", "Galaxy A06",
+    "Galaxy A12", "Galaxy A13", "Galaxy A14",
+    "Galaxy A15", "Galaxy A16", "Galaxy A22",
+    "Galaxy A23", "Galaxy A24", "Galaxy A25",
+    "Galaxy A32", "Galaxy A33", "Galaxy A34",
+    "Galaxy A35", "Galaxy A52", "Galaxy A53",
+    "Galaxy A54", "Galaxy A55", "Galaxy A56",
+    "Galaxy S21", "Galaxy S22", "Galaxy S23",
+    "Galaxy S24", "Galaxy S25", "Galaxy S26",
+    "Galaxy S21 FE", "Galaxy S23 FE",
+    "Galaxy S24 FE", "Galaxy Note 20",
+    "Galaxy M14", "Galaxy M15", "Galaxy M34",
+    "Galaxy M35", "Galaxy M55", "Galaxy Z Flip 6",
+    "Galaxy Z Fold 6"
+  ],
+  "Xiaomi": [
+    "Redmi 9", "Redmi 10", "Redmi 12",
+    "Redmi 13", "Redmi 13C", "Redmi 14C",
+    "Redmi Note 10", "Redmi Note 11",
+    "Redmi Note 12", "Redmi Note 13",
+    "Redmi Note 13 Pro", "Redmi Note 14",
+    "Redmi Note 14 Pro", "Redmi A3",
+    "Redmi K50", "Redmi K60", "Redmi K70",
+    "Redmi K80", "Xiaomi 12", "Xiaomi 13",
+    "Xiaomi 14", "Xiaomi 15", "Xiaomi 15 Ultra",
+    "POCO C65", "POCO C75", "POCO M5",
+    "POCO M6", "POCO M6 Pro", "POCO X5 Pro",
+    "POCO X6", "POCO X6 Pro", "POCO X7",
+    "POCO X7 Pro", "POCO F5", "POCO F6",
+    "POCO F7", "POCO F7 Pro"
+  ],
+  "Apple": [
+    "iPhone 11", "iPhone 11 Pro", "iPhone 12",
+    "iPhone 12 Pro", "iPhone 13", "iPhone 13 Pro",
+    "iPhone 14", "iPhone 14 Plus", "iPhone 14 Pro",
+    "iPhone 15", "iPhone 15 Plus", "iPhone 15 Pro",
+    "iPhone 16", "iPhone 16 Plus", "iPhone 16 Pro",
+    "iPhone 17", "iPhone 17 Pro", "iPhone 17 Pro Max",
+    "iPhone SE (2022)"
+  ],
+  "Motorola": [
+    "Moto E13", "Moto E14", "Moto G14",
+    "Moto G24", "Moto G34", "Moto G54",
+    "Moto G55", "Moto G64", "Moto G73",
+    "Moto G84", "Moto G85", "Moto G Power",
+    "Edge 30", "Edge 40", "Edge 50",
+    "Edge 50 Pro", "Edge 60", "Edge 60 Pro",
+    "Razr 50", "Razr 60"
+  ],
+  "Huawei": [
+    "P30", "P40", "P50", "P60", "Pura 70",
+    "Mate 30", "Mate 40", "Mate 50", "Mate 60",
+    "Nova 9", "Nova 10", "Nova 11", "Nova 12",
+    "Nova 13", "Y9 Prime", "Y9a", "Y70",
+    "Y90", "Y91"
+  ],
+  "Honor": [
+    "X6", "X7", "X8", "X9", "X9b", "X9c",
+    "X5 Plus", "90 Lite", "Honor 90", "Honor 200",
+    "Honor 200 Pro", "Magic 5 Pro", "Magic 6 Pro",
+    "Magic 7 Pro"
+  ],
+  "OPPO": [
+    "A16", "A17", "A18", "A38", "A58", "A60",
+    "A78", "A79", "A98", "Reno 8", "Reno 10",
+    "Reno 11", "Reno 12", "Reno 13",
+    "Find X5 Pro", "Find X8 Pro"
+  ],
+  "vivo": [
+    "Y16", "Y17s", "Y22s", "Y27", "Y28",
+    "Y36", "Y38", "Y100", "V25", "V27",
+    "V29", "V30", "V40", "V50",
+    "iQOO Neo 9", "iQOO 12", "iQOO 13"
+  ],
+  "Realme": [
+    "C30", "C33", "C51", "C53", "C55",
+    "C61", "C63", "C65", "C67", "C75",
+    "Narzo 50", "Narzo 60", "Narzo 70",
+    "Realme 9 Pro+", "Realme 11", "Realme 12",
+    "Realme 13 Pro+", "GT Neo 3", "GT 6"
+  ],
+  "Infinix": [
+    "Smart 7", "Smart 8", "Smart 9",
+    "Hot 10", "Hot 30", "Hot 40", "Hot 50",
+    "Note 12", "Note 30", "Note 40",
+    "Note 50", "Zero 30", "Zero 40",
+    "GT 10 Pro", "GT 20 Pro"
+  ],
+  "Tecno": [
+    "Spark 10", "Spark 20", "Spark 30",
+    "Spark 40", "Pova 5", "Pova 6", "Pova 7",
+    "Camon 20", "Camon 30", "Camon 40",
+    "Phantom V Fold", "Phantom V Flip"
+  ],
+  "Google": [
+    "Pixel 6", "Pixel 6a", "Pixel 7",
+    "Pixel 7a", "Pixel 8", "Pixel 8a",
+    "Pixel 9", "Pixel 9a", "Pixel 9 Pro",
+    "Pixel 10", "Pixel 10 Pro"
+  ],
+  "OnePlus": [
+    "OnePlus 9", "OnePlus 10 Pro", "OnePlus 11",
+    "OnePlus 12", "OnePlus 13", "OnePlus Nord 2",
+    "OnePlus Nord 3", "OnePlus Nord 4",
+    "OnePlus Nord CE 3", "OnePlus Nord CE 4"
+  ],
+  "ASUS": [
+    "ROG Phone 6", "ROG Phone 7", "ROG Phone 8",
+    "ROG Phone 9", "Zenfone 10", "Zenfone 11 Ultra",
+    "Zenfone 12 Ultra"
+  ],
+  "Sony": [
+    "Xperia 1 IV", "Xperia 1 V", "Xperia 1 VI",
+    "Xperia 5 V", "Xperia 10 V", "Xperia 10 VI"
+  ],
+  "ZTE": [
+    "Blade A31", "Blade A51", "Blade A53",
+    "Blade A73", "Nubia Neo 2", "Nubia Neo 3",
+    "Nubia Z60 Ultra", "RedMagic 8 Pro",
+    "RedMagic 9 Pro", "RedMagic 10 Pro"
+  ]
+};
+
+const devices = Object.entries(devicesData).flatMap(
+  ([brand, models]) => models.map(model => ({ brand, model }))
+);
+
+const $ = id => document.getElementById(id);
+
+let selectedDevice = null;
+let useDpi = false;
+let currentConfig = null;
+
+const brandSelect = $("brand");
+const search = $("search");
+const deviceList = $("devices");
+
+Object.keys(devicesData).sort().forEach(brand => {
+  const option = document.createElement("option");
+  option.value = brand;
+  option.textContent = brand;
+  brandSelect.appendChild(option);
+});
+
+function renderDevices() {
+  const query = search.value.trim().toLocaleLowerCase("es");
+  const brand = brandSelect.value;
+
+  const filtered = devices.filter(device => {
+    const matchesQuery =
+      (device.brand + " " + device.model)
+        .toLocaleLowerCase("es").includes(query);
+
+    const matchesBrand =
+      brand === "Todas" || device.brand === brand;
+
+    return matchesQuery && matchesBrand;
+  }).slice(0, 16);
+
+  deviceList.replaceChildren();
+
+  if (!filtered.length) {
+    const empty = document.createElement("p");
+    empty.className = "empty";
+    empty.textContent =
+      "No encontramos ese modelo. Puedes usar otro celular de la lista.";
+    deviceList.appendChild(empty);
+    return;
+  }
+
+  filtered.forEach(device => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "device";
+
+    if (selectedDevice &&
+        selectedDevice.brand === device.brand &&
+        selectedDevice.model === device.model) {
+      button.classList.add("active");
+    }
+
+    const name = document.createElement("span");
+    name.textContent = device.model;
+
+    const brandName = document.createElement("small");
+    brandName.textContent = device.brand;
+
+    button.append(name, brandName);
+
+    button.addEventListener("click", () => {
+      selectedDevice = device;
+      renderDevices();
+    });
+
+    deviceList.appendChild(button);
+  });
+}
+
+search.addEventListener("input", renderDevices);
+brandSelect.addEventListener("change", renderDevices);
+
+document.querySelectorAll(".dpi-option").forEach(button => {
+  button.addEventListener("click", () => {
+    useDpi = button.dataset.dpi === "si";
+
+    document.querySelectorAll(".dpi-option").forEach(option => {
+      option.classList.toggle("active", option === button);
+    });
+  });
+});
+
+function randomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function generateSensitivity() {
+  const style = $("style").value;
+
+  // Rangos orientativos, no valores oficiales ni optimizados.
+  const ranges = {
+    Alta:  [155, 200],
+    Media: [105, 165],
+    Baja:  [65, 125]
+  };
+
+  const [min, max] = ranges[style];
+
+  // Cada apartado recibe una variación independiente.
+  const config = {
+    "General": randomInt(min, max),
+    "Punto rojo": randomInt(min - 8, max - 4),
+    "Mira 2x": randomInt(min - 20, max - 12),
+    "Mira 4x": randomInt(min - 35, max - 25),
+    "Mira francotirador": randomInt(20, 100),
+    "Cámara libre": randomInt(min - 15, max)
+  };
+
+  // Limita los valores al rango permitido del generador.
+  Object.keys(config).forEach(key => {
+    config[key] = Math.max(0, Math.min(200, config[key]));
+  });
+
+  return config;
+}
+
+function generate() {
+  if (!selectedDevice) {
+    selectedDevice = devices.find(
+      device => device.brand === "Samsung" &&
+                device.model === "Galaxy A15"
+    );
+  }
+
+  currentConfig = generateSensitivity();
+
+  $("resultStyle").textContent =
+    "ESTILO " + $("style").value.toUpperCase();
+
+  $("resultDevice").textContent =
+    selectedDevice.brand + " " + selectedDevice.model +
+    " · " + (useDpi ? "Con DPI" : "Sin DPI");
+
+  const grid = $("sensiGrid");
+  grid.replaceChildren();
+
+  Object.entries(currentConfig).forEach(([name, value]) => {
+    const card = document.createElement("div");
+    card.className = "sensi-card";
+
+    const label = document.createElement("span");
+    label.textContent = name;
+
+    const number = document.createElement("strong");
+    number.textC
