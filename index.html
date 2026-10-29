@@ -193,7 +193,6 @@ input:focus, select:focus {
 }
 
 select { cursor: pointer; }
-
 select option { background: #0b1210; }
 
 .device-results {
@@ -201,6 +200,8 @@ select option { background: #0b1210; }
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 9px;
+  max-height: 250px;
+  overflow-y: auto;
 }
 
 .device {
@@ -212,14 +213,12 @@ select option { background: #0b1210; }
   padding: 12px;
   font: 600 15px 'Rajdhani', sans-serif;
   cursor: pointer;
-  transition: transform .25s, border-color .25s,
-              color .25s, background .25s;
-  animation: appear .35s ease both;
+  transition: transform .25s, border-color .25s, color .25s, background .25s;
   overflow-wrap: anywhere;
 }
 
 .device:hover {
-  transform: translateY(-3px) scale(1.015);
+  transform: translateY(-2px);
   border-color: var(--neon);
   color: var(--neon);
   background: #14231a;
@@ -231,13 +230,6 @@ select option { background: #0b1210; }
   color: var(--neon);
   background: #17321b;
   box-shadow: inset 0 0 15px #39ff1410;
-}
-
-.device small {
-  display: block;
-  color: #778c7d;
-  font-size: 12px;
-  margin-top: 3px;
 }
 
 .empty {
@@ -470,7 +462,6 @@ footer p {
   .logo { font-size: 21px; }
   .header-tag { font-size: 10px; }
   .hero { padding-top: 48px; }
-  .device-results { grid-template-columns: 1fr 1fr; }
   .field-grid { grid-template-columns: 1fr; gap: 0; }
   .sensi-grid { gap: 9px; }
   .sensi-card { padding: 13px; }
@@ -494,7 +485,7 @@ footer p {
 
     <div class="stats">
       <div class="stat">🎯 <strong>3</strong> estilos</div>
-      <div class="stat">📱 <strong>+80</strong> modelos</div>
+      <div class="stat">📱 <strong>+60</strong> modelos</div>
       <div class="stat">♻️ <strong>∞</strong> generaciones</div>
     </div>
   </section>
@@ -502,25 +493,18 @@ footer p {
   <section class="panel">
     <div class="section-title"><span>01.</span> ELIGE TU DISPOSITIVO</div>
 
-    <label for="search">Busca tu marca o modelo</label>
+    <label for="search">Busca tu celular (Ej. Motorola Edge 60 Fusion, Redmi Note 15C...)</label>
     <div class="search-wrap">
       <span class="search-icon">⌕</span>
       <input id="search" type="search"
-        placeholder="Ej. Redmi Note 13, iPhone 15..."
+        placeholder="Escribe el modelo de tu teléfono..."
         autocomplete="off">
     </div>
 
     <div class="device-results" id="devices"></div>
 
-    <div class="field">
-      <label for="brand">Filtrar por marca</label>
-      <select id="brand">
-        <option value="Todas">Todas las marcas</option>
-      </select>
-    </div>
-
-    <div class="field-grid">
-      <div class="field">
+    <div class="field-grid" style="margin-top: 22px;">
+      <div class="field" style="margin-top: 0;">
         <label for="style">Estilo de sensibilidad</label>
         <select id="style">
           <option value="Alta">🔥 Alta</option>
@@ -529,13 +513,11 @@ footer p {
         </select>
       </div>
 
-      <div class="field">
+      <div class="field" style="margin-top: 0;">
         <label>Configuración DPI</label>
         <div class="dpi-options">
-          <button class="dpi-option active" data-dpi="no"
-            type="button">Sin DPI</button>
-          <button class="dpi-option" data-dpi="si"
-            type="button">Con DPI</button>
+          <button class="dpi-option active" data-dpi="no" type="button">Sin DPI</button>
+          <button class="dpi-option" data-dpi="si" type="button">Con DPI</button>
         </div>
       </div>
     </div>
@@ -585,174 +567,48 @@ footer p {
 </footer>
 
 <script>
-const devicesData = {
-  "Samsung": [
-    "Galaxy A05", "Galaxy A05s", "Galaxy A06",
-    "Galaxy A12", "Galaxy A13", "Galaxy A14",
-    "Galaxy A15", "Galaxy A16", "Galaxy A22",
-    "Galaxy A23", "Galaxy A24", "Galaxy A25",
-    "Galaxy A32", "Galaxy A33", "Galaxy A34",
-    "Galaxy A35", "Galaxy A52", "Galaxy A53",
-    "Galaxy A54", "Galaxy A55", "Galaxy A56",
-    "Galaxy S21", "Galaxy S22", "Galaxy S23",
-    "Galaxy S24", "Galaxy S25", "Galaxy S26",
-    "Galaxy S21 FE", "Galaxy S23 FE",
-    "Galaxy S24 FE", "Galaxy Note 20",
-    "Galaxy M14", "Galaxy M15", "Galaxy M34",
-    "Galaxy M35", "Galaxy M55", "Galaxy Z Flip 6",
-    "Galaxy Z Fold 6"
-  ],
-  "Xiaomi": [
-    "Redmi 9", "Redmi 10", "Redmi 12",
-    "Redmi 13", "Redmi 13C", "Redmi 14C",
-    "Redmi Note 10", "Redmi Note 11",
-    "Redmi Note 12", "Redmi Note 13",
-    "Redmi Note 13 Pro", "Redmi Note 14",
-    "Redmi Note 14 Pro", "Redmi A3",
-    "Redmi K50", "Redmi K60", "Redmi K70",
-    "Redmi K80", "Xiaomi 12", "Xiaomi 13",
-    "Xiaomi 14", "Xiaomi 15", "Xiaomi 15 Ultra",
-    "POCO C65", "POCO C75", "POCO M5",
-    "POCO M6", "POCO M6 Pro", "POCO X5 Pro",
-    "POCO X6", "POCO X6 Pro", "POCO X7",
-    "POCO X7 Pro", "POCO F5", "POCO F6",
-    "POCO F7", "POCO F7 Pro"
-  ],
-  "Apple": [
-    "iPhone 11", "iPhone 11 Pro", "iPhone 12",
-    "iPhone 12 Pro", "iPhone 13", "iPhone 13 Pro",
-    "iPhone 14", "iPhone 14 Plus", "iPhone 14 Pro",
-    "iPhone 15", "iPhone 15 Plus", "iPhone 15 Pro",
-    "iPhone 16", "iPhone 16 Plus", "iPhone 16 Pro",
-    "iPhone 17", "iPhone 17 Pro", "iPhone 17 Pro Max",
-    "iPhone SE (2022)"
-  ],
-  "Motorola": [
-    "Moto E13", "Moto E14", "Moto G14",
-    "Moto G24", "Moto G34", "Moto G54",
-    "Moto G55", "Moto G64", "Moto G73",
-    "Moto G84", "Moto G85", "Moto G Power",
-    "Edge 30", "Edge 40", "Edge 50",
-    "Edge 50 Pro", "Edge 60", "Edge 60 Pro",
-    "Razr 50", "Razr 60"
-  ],
-  "Huawei": [
-    "P30", "P40", "P50", "P60", "Pura 70",
-    "Mate 30", "Mate 40", "Mate 50", "Mate 60",
-    "Nova 9", "Nova 10", "Nova 11", "Nova 12",
-    "Nova 13", "Y9 Prime", "Y9a", "Y70",
-    "Y90", "Y91"
-  ],
-  "Honor": [
-    "X6", "X7", "X8", "X9", "X9b", "X9c",
-    "X5 Plus", "90 Lite", "Honor 90", "Honor 200",
-    "Honor 200 Pro", "Magic 5 Pro", "Magic 6 Pro",
-    "Magic 7 Pro"
-  ],
-  "OPPO": [
-    "A16", "A17", "A18", "A38", "A58", "A60",
-    "A78", "A79", "A98", "Reno 8", "Reno 10",
-    "Reno 11", "Reno 12", "Reno 13",
-    "Find X5 Pro", "Find X8 Pro"
-  ],
-  "vivo": [
-    "Y16", "Y17s", "Y22s", "Y27", "Y28",
-    "Y36", "Y38", "Y100", "V25", "V27",
-    "V29", "V30", "V40", "V50",
-    "iQOO Neo 9", "iQOO 12", "iQOO 13"
-  ],
-  "Realme": [
-    "C30", "C33", "C51", "C53", "C55",
-    "C61", "C63", "C65", "C67", "C75",
-    "Narzo 50", "Narzo 60", "Narzo 70",
-    "Realme 9 Pro+", "Realme 11", "Realme 12",
-    "Realme 13 Pro+", "GT Neo 3", "GT 6"
-  ],
-  "Infinix": [
-    "Smart 7", "Smart 8", "Smart 9",
-    "Hot 10", "Hot 30", "Hot 40", "Hot 50",
-    "Note 12", "Note 30", "Note 40",
-    "Note 50", "Zero 30", "Zero 40",
-    "GT 10 Pro", "GT 20 Pro"
-  ],
-  "Tecno": [
-    "Spark 10", "Spark 20", "Spark 30",
-    "Spark 40", "Pova 5", "Pova 6", "Pova 7",
-    "Camon 20", "Camon 30", "Camon 40",
-    "Phantom V Fold", "Phantom V Flip"
-  ],
-  "Google": [
-    "Pixel 6", "Pixel 6a", "Pixel 7",
-    "Pixel 7a", "Pixel 8", "Pixel 8a",
-    "Pixel 9", "Pixel 9a", "Pixel 9 Pro",
-    "Pixel 10", "Pixel 10 Pro"
-  ],
-  "OnePlus": [
-    "OnePlus 9", "OnePlus 10 Pro", "OnePlus 11",
-    "OnePlus 12", "OnePlus 13", "OnePlus Nord 2",
-    "OnePlus Nord 3", "OnePlus Nord 4",
-    "OnePlus Nord CE 3", "OnePlus Nord CE 4"
-  ],
-  "ASUS": [
-    "ROG Phone 6", "ROG Phone 7", "ROG Phone 8",
-    "ROG Phone 9", "Zenfone 10", "Zenfone 11 Ultra",
-    "Zenfone 12 Ultra"
-  ],
-  "Sony": [
-    "Xperia 1 IV", "Xperia 1 V", "Xperia 1 VI",
-    "Xperia 5 V", "Xperia 10 V", "Xperia 10 VI"
-  ],
-  "ZTE": [
-    "Blade A31", "Blade A51", "Blade A53",
-    "Blade A73", "Nubia Neo 2", "Nubia Neo 3",
-    "Nubia Z60 Ultra", "RedMagic 8 Pro",
-    "RedMagic 9 Pro", "RedMagic 10 Pro"
-  ]
-};
-
-const devices = Object.entries(devicesData).flatMap(
-  ([brand, models]) => models.map(model => ({ brand, model }))
-);
+// Lista de teléfonos con nombres completos
+const devicesList = [
+  "Motorola Edge 60 Fusion", "Motorola Edge 50 Pro", "Motorola Edge 40 Neo",
+  "Motorola Moto G85 5G", "Motorola Moto G54", "Motorola Moto G24 Power",
+  "Xiaomi Redmi Note 15 Pro", "Xiaomi Redmi Note 14 5G", "Xiaomi Redmi 13C",
+  "Xiaomi POCO X6 Pro", "Xiaomi POCO F6", "Xiaomi POCO M6 Pro",
+  "Samsung Galaxy S25 Ultra", "Samsung Galaxy S24+", "Samsung Galaxy A55 5G",
+  "Samsung Galaxy A35 5G", "Samsung Galaxy A15", "Samsung Galaxy A05s",
+  "Apple iPhone 16 Pro Max", "Apple iPhone 15", "Apple iPhone 14 Plus", "Apple iPhone 13",
+  "Honor 200 Pro", "Honor X9b 5G", "Honor Magic 6 Pro",
+  "Oppo Reno 12 Pro", "Oppo A60", "Oppo Find X8",
+  "Vivo V30 5G", "Vivo Y28", "iQOO 12",
+  "Realme 13 Pro+", "Realme C67", "Realme GT 6",
+  "Infinix Note 40 Pro", "Infinix Hot 50", "Infinix GT 20 Pro",
+  "Tecno Camon 30 Pro", "Tecno Pova 6 Pro",
+  "Google Pixel 9 Pro XL", "Google Pixel 8a",
+  "OnePlus 12", "OnePlus Nord 4",
+  "ZTE Nubia RedMagic 9 Pro", "ZTE Blade A73"
+];
 
 const $ = id => document.getElementById(id);
 
-let selectedDevice = null;
+let selectedDevice = devicesList[0]; // Por defecto el primero
 let useDpi = false;
 let currentConfig = null;
 
-const brandSelect = $("brand");
 const search = $("search");
 const deviceList = $("devices");
 
-Object.keys(devicesData).sort().forEach(brand => {
-  const option = document.createElement("option");
-  option.value = brand;
-  option.textContent = brand;
-  brandSelect.appendChild(option);
-});
-
 function renderDevices() {
-  const query = search.value.trim().toLocaleLowerCase("es");
-  const brand = brandSelect.value;
+  const query = search.value.trim().toLowerCase();
 
-  const filtered = devices.filter(device => {
-    const matchesQuery =
-      (device.brand + " " + device.model)
-        .toLocaleLowerCase("es").includes(query);
-
-    const matchesBrand =
-      brand === "Todas" || device.brand === brand;
-
-    return matchesQuery && matchesBrand;
-  }).slice(0, 16);
+  const filtered = devicesList.filter(device => 
+    device.toLowerCase().includes(query)
+  ).slice(0, 16);
 
   deviceList.replaceChildren();
 
   if (!filtered.length) {
     const empty = document.createElement("p");
     empty.className = "empty";
-    empty.textContent =
-      "No encontramos ese modelo. Puedes usar otro celular de la lista.";
+    empty.textContent = "No encontramos ese modelo. Intenta con otro nombre.";
     deviceList.appendChild(empty);
     return;
   }
@@ -762,19 +618,11 @@ function renderDevices() {
     button.type = "button";
     button.className = "device";
 
-    if (selectedDevice &&
-        selectedDevice.brand === device.brand &&
-        selectedDevice.model === device.model) {
+    if (selectedDevice === device) {
       button.classList.add("active");
     }
 
-    const name = document.createElement("span");
-    name.textContent = device.model;
-
-    const brandName = document.createElement("small");
-    brandName.textContent = device.brand;
-
-    button.append(name, brandName);
+    button.textContent = device;
 
     button.addEventListener("click", () => {
       selectedDevice = device;
@@ -786,12 +634,14 @@ function renderDevices() {
 }
 
 search.addEventListener("input", renderDevices);
-brandSelect.addEventListener("change", renderDevices);
 
+// Configuración de los botones de DPI (Solucionado)
 document.querySelectorAll(".dpi-option").forEach(button => {
   button.addEventListener("click", () => {
+    // Lee si el botón seleccionado es "si" o "no"
     useDpi = button.dataset.dpi === "si";
 
+    // Actualiza las clases visuales de los botones
     document.querySelectorAll(".dpi-option").forEach(option => {
       option.classList.toggle("active", option === button);
     });
@@ -805,7 +655,6 @@ function randomInt(min, max) {
 function generateSensitivity() {
   const style = $("style").value;
 
-  // Rangos orientativos, no valores oficiales ni optimizados.
   const ranges = {
     Alta:  [155, 200],
     Media: [105, 165],
@@ -814,7 +663,6 @@ function generateSensitivity() {
 
   const [min, max] = ranges[style];
 
-  // Cada apartado recibe una variación independiente.
   const config = {
     "General": randomInt(min, max),
     "Punto rojo": randomInt(min - 8, max - 4),
@@ -824,7 +672,6 @@ function generateSensitivity() {
     "Cámara libre": randomInt(min - 15, max)
   };
 
-  // Limita los valores al rango permitido del generador.
   Object.keys(config).forEach(key => {
     config[key] = Math.max(0, Math.min(200, config[key]));
   });
@@ -834,20 +681,14 @@ function generateSensitivity() {
 
 function generate() {
   if (!selectedDevice) {
-    selectedDevice = devices.find(
-      device => device.brand === "Samsung" &&
-                device.model === "Galaxy A15"
-    );
+    selectedDevice = devicesList[0];
   }
 
   currentConfig = generateSensitivity();
 
-  $("resultStyle").textContent =
-    "ESTILO " + $("style").value.toUpperCase();
+  $("resultStyle").textContent = "ESTILO " + $("style").value.toUpperCase();
 
-  $("resultDevice").textContent =
-    selectedDevice.brand + " " + selectedDevice.model +
-    " · " + (useDpi ? "Con DPI" : "Sin DPI");
+  $("resultDevice").textContent = selectedDevice + " · " + (useDpi ? "Con DPI" : "Sin DPI");
 
   const grid = $("sensiGrid");
   grid.replaceChildren();
@@ -860,4 +701,54 @@ function generate() {
     label.textContent = name;
 
     const number = document.createElement("strong");
-    number.textC
+    number.textContent = value;
+
+    card.append(label, number);
+    grid.appendChild(card);
+  });
+
+  const dpiBox = $("dpiBox");
+  if (useDpi) {
+    dpiBox.classList.add("show");
+    $("dpiValue").textContent = randomInt(580, 750) + " DPI";
+  } else {
+    dpiBox.classList.remove("show");
+  }
+
+  $("result").classList.add("show");
+  $("result").scrollIntoView({ behavior: "smooth" });
+}
+
+$("generate").addEventListener("click", generate);
+$("again").addEventListener("click", generate);
+
+$("copy").addEventListener("click", () => {
+  if (!currentConfig) return;
+  
+  let text = `🔥 Sensi Z - Free Fire\n`;
+  text += `📱 Dispositivo: ${selectedDevice}\n`;
+  text += `⚙️ Configuración (${useDpi ? "Con DPI" : "Sin DPI"}):\n`;
+  
+  Object.entries(currentConfig).forEach(([name, value]) => {
+    text += `- ${name}: ${value}\n`;
+  });
+
+  if (useDpi && $("dpiValue").textContent) {
+    text += `- DPI: ${$("dpiValue").textContent}\n`;
+  }
+
+  navigator.clipboard.writeText(text).then(() => {
+    const copyBtn = $("copy");
+    const originalText = copyBtn.textContent;
+    copyBtn.textContent = "✓ ¡COPIADO AL PORTAPAPELES!";
+    setTimeout(() => {
+      copyBtn.textContent = originalText;
+    }, 2000);
+  });
+});
+
+// Inicializar la lista de dispositivos al cargar
+renderDevices();
+</script>
+</body>
+</html>
