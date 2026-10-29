@@ -1,4 +1,4 @@
-Pero<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -200,15 +200,18 @@ select option { background: #0b1210; }
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 9px;
-  max-height: 280px;
+  max-height: 260px;
   overflow-y: auto;
   padding-right: 4px;
+  border: 1px solid #1a2e20;
+  background: #040705;
+  border-radius: 10px;
+  padding: 10px;
 }
 
 .device-results::-webkit-scrollbar { width: 6px; }
 .device-results::-webkit-scrollbar-track { background: #080e0a; }
 .device-results::-webkit-scrollbar-thumb { background: #263c2c; border-radius: 10px; }
-.device-results::-webkit-scrollbar-thumb:hover { background: var(--neon); }
 
 .device {
   text-align: left;
@@ -219,8 +222,7 @@ select option { background: #0b1210; }
   padding: 12px;
   font: 600 15px 'Rajdhani', sans-serif;
   cursor: pointer;
-  transition: transform .25s, border-color .25s, color .25s, background .25s;
-  overflow-wrap: anywhere;
+  transition: .25s;
 }
 
 .device:hover {
@@ -228,7 +230,6 @@ select option { background: #0b1210; }
   border-color: var(--neon);
   color: var(--neon);
   background: #14231a;
-  box-shadow: 0 0 15px #39ff1418;
 }
 
 .device.active {
@@ -241,7 +242,8 @@ select option { background: #0b1210; }
 .empty {
   color: #a6b8ad;
   grid-column: 1 / -1;
-  padding: 15px 0;
+  padding: 15px;
+  text-align: center;
 }
 
 .field-grid {
@@ -298,11 +300,7 @@ select option { background: #0b1210; }
   box-shadow: 0 0 32px #39ff1460;
 }
 
-.primary-btn:active { transform: scale(.97); }
-
-.result {
-  display: none;
-}
+.result { display: none; }
 
 .result.show {
   display: block;
@@ -348,12 +346,6 @@ select option { background: #0b1210; }
   border-radius: 12px;
   background: #070c09;
   padding: 17px;
-  transition: .25s;
-}
-
-.sensi-card:hover {
-  border-color: #39ff1480;
-  transform: translateY(-2px);
 }
 
 .sensi-card span {
@@ -366,7 +358,6 @@ select option { background: #0b1210; }
   color: var(--neon);
   font: 800 clamp(24px, 5vw, 34px) 'Orbitron', sans-serif;
   margin-top: 10px;
-  animation: numberIn .4s ease both;
 }
 
 .dpi-box {
@@ -378,10 +369,7 @@ select option { background: #0b1210; }
   border-radius: 12px;
 }
 
-.dpi-box.show {
-  display: block;
-  animation: appear .4s ease;
-}
+.dpi-box.show { display: block; }
 
 .dpi-box strong {
   color: var(--neon);
@@ -414,11 +402,7 @@ select option { background: #0b1210; }
   transition: .25s;
 }
 
-.secondary-btn:hover {
-  background: #39ff1418;
-  box-shadow: 0 0 20px #39ff1420;
-  transform: translateY(-2px);
-}
+.secondary-btn:hover { background: #39ff1418; }
 
 footer {
   margin-top: 55px;
@@ -452,24 +436,10 @@ footer p {
   to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes numberIn {
-  from { opacity: 0; transform: scale(.8); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-@keyframes logoPulse {
-  0%, 100% { text-shadow: 0 0 10px #39ff1440; }
-  50% { text-shadow: 0 0 23px #39ff1490; }
-}
-
 @media (max-width: 540px) {
   header { padding: 14px 5%; }
   .logo { font-size: 21px; }
-  .header-tag { font-size: 10px; }
-  .hero { padding-top: 48px; }
-  .field-grid { grid-template-columns: 1fr; gap: 12px; }
-  .sensi-grid { gap: 9px; }
-  .sensi-card { padding: 13px; }
+  .field-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -486,4 +456,238 @@ footer p {
   <section class="hero">
     <div class="pill">⚡ GENERADOR GAMER</div>
     <h1>DOMINA CON<br><span>SENSI Z</span></h1>
-    <p>Encuentra tu próxima sensibilidad. Elige tu celular, configura tu estilo y genera
+    <p>Encuentra tu próxima sensibilidad. Elige tu celular, configura tu estilo y genera una nueva combinación.</p>
+
+    <div class="stats">
+      <div class="stat">🎯 <strong>3</strong> estilos</div>
+      <div class="stat">📱 <strong>+180</strong> modelos</div>
+      <div class="stat">♻️ <strong>∞</strong> generaciones</div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="section-title"><span>01.</span> ELIGE TU DISPOSITIVO</div>
+
+    <label for="search">Busca tu celular (Ej. iPhone 11, Huawei Y5, Redmi Note 13...)</label>
+    <div class="search-wrap">
+      <span class="search-icon">⌕</span>
+      <input id="search" type="search" placeholder="Escribe el modelo de tu teléfono..." autocomplete="off">
+    </div>
+
+    <!-- Contenedor con borde visible para asegurarnos de que se note la caja -->
+    <div class="device-results" id="devices"></div>
+
+    <div class="field-grid">
+      <div class="field">
+        <label for="style">Estilo de sensibilidad</label>
+        <select id="style">
+          <option value="Alta">🔥 Alta</option>
+          <option value="Media" selected>⚡ Media</option>
+          <option value="Baja">🎯 Baja</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Configuración DPI</label>
+        <div class="dpi-options">
+          <button class="dpi-option active" id="btnNoDpi" type="button">Sin DPI</button>
+          <button class="dpi-option" id="btnSiDpi" type="button">Con DPI</button>
+        </div>
+      </div>
+    </div>
+
+    <button class="primary-btn" id="generate" type="button">⚡ GENERAR SENSIBILIDAD</button>
+  </section>
+
+  <section class="panel result" id="result" aria-live="polite">
+    <div class="result-heading">
+      <h2>✦ TU CONFIGURACIÓN</h2>
+      <span class="tag" id="resultStyle">ESTILO MEDIO</span>
+    </div>
+
+    <p class="result-device" id="resultDevice"></p>
+
+    <div class="sensi-grid" id="sensiGrid"></div>
+
+    <div class="dpi-box" id="dpiBox">
+      <span>📲 DPI sugerido (Android)</span>
+      <br><br>
+      <strong id="dpiValue"></strong>
+      <p>Es una sugerencia orientativa. Comprueba la compatibilidad y anota tu valor original antes de cambiar los ajustes del sistema.</p>
+    </div>
+
+    <p class="note">
+      Esta combinación se genera aleatoriamente. Pruébala en el campo de entrenamiento y ajusta los valores según tu pantalla, controles y comodidad.
+    </p>
+
+    <button class="secondary-btn" id="again" type="button">↻ GENERAR OTRA SENSIBILIDAD</button>
+    <button class="secondary-btn" id="copy" type="button">▣ COPIAR CONFIGURACIÓN</button>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-logo">SENSI Z</div>
+  <div class="slogan">JUEGA <span>LEGAL</span>,<br>ES MÁS DIVERTIDO 💚</div>
+  <p>Herramienta independiente para jugadores de Free Fire.</p>
+  <p>No afiliada ni respaldada oficialmente por Garena.</p>
+</footer>
+
+<script>
+const devicesList = [
+  "Apple iPhone X", "Apple iPhone XR", "Apple iPhone XS", "Apple iPhone XS Max",
+  "Apple iPhone 11", "Apple iPhone 11 Pro", "Apple iPhone 11 Pro Max",
+  "Apple iPhone 12", "Apple iPhone 12 Mini", "Apple iPhone 12 Pro", "Apple iPhone 12 Pro Max",
+  "Apple iPhone 13", "Apple iPhone 13 Mini", "Apple iPhone 13 Pro", "Apple iPhone 13 Pro Max",
+  "Apple iPhone 14", "Apple iPhone 14 Plus", "Apple iPhone 14 Pro", "Apple iPhone 14 Pro Max",
+  "Apple iPhone 15", "Apple iPhone 15 Plus", "Apple iPhone 15 Pro", "Apple iPhone 15 Pro Max",
+  "Apple iPhone 16", "Apple iPhone 16 Pro Max", "Apple iPhone 17 Pro Max", "Apple iPhone SE",
+  "Huawei Y5 2018", "Huawei Y5 2019", "Huawei Y5p", "Huawei Y6 2019", "Huawei Y6p",
+  "Huawei Y7 2019", "Huawei Y7p", "Huawei Y9 2019", "Huawei Y9 Prime", "Huawei Y9a",
+  "Huawei Nova 5T", "Huawei Nova 7i", "Huawei Nova 9", "Huawei Nova 10", "Huawei Nova 11 Pro",
+  "Huawei P20 Lite", "Huawei P30 Lite", "Huawei P30 Pro", "Huawei P40 Lite", "Huawei P40 Pro", "Huawei Pura 70 Ultra",
+  "Xiaomi Redmi 7", "Xiaomi Redmi 8", "Xiaomi Redmi 9", "Xiaomi Redmi 9A", "Xiaomi Redmi 9C",
+  "Xiaomi Redmi 10", "Xiaomi Redmi 12", "Xiaomi Redmi 13C", "Xiaomi Redmi 14C", "Xiaomi Redmi 15C",
+  "Xiaomi Redmi Note 7", "Xiaomi Redmi Note 8", "Xiaomi Redmi Note 8 Pro", "Xiaomi Redmi Note 9",
+  "Xiaomi Redmi Note 10", "Xiaomi Redmi Note 11", "Xiaomi Redmi Note 12", "Xiaomi Redmi Note 13 Pro 5G", "Xiaomi Redmi Note 14 Pro",
+  "Xiaomi POCO X3 Pro", "Xiaomi POCO X5 Pro", "Xiaomi POCO X6 Pro 5G", "Xiaomi POCO F5 Pro", "Xiaomi POCO F6", "Xiaomi POCO M6 Pro",
+  "Samsung Galaxy A03 Core", "Samsung Galaxy A04s", "Samsung Galaxy A05", "Samsung Galaxy A05s", "Samsung Galaxy A06",
+  "Samsung Galaxy A10s", "Samsung Galaxy A12", "Samsung Galaxy A13", "Samsung Galaxy A14 5G", "Samsung Galaxy A15 5G", "Samsung Galaxy A16",
+  "Samsung Galaxy A21s", "Samsung Galaxy A22 5G", "Samsung Galaxy A23", "Samsung Galaxy A25 5G",
+  "Samsung Galaxy A32", "Samsung Galaxy A34 5G", "Samsung Galaxy A35 5G", "Samsung Galaxy A51", "Samsung Galaxy A52s 5G", "Samsung Galaxy A54 5G", "Samsung Galaxy A55 5G",
+  "Samsung Galaxy S20 FE", "Samsung Galaxy S21 FE", "Samsung Galaxy S22 Ultra", "Samsung Galaxy S23 Ultra", "Samsung Galaxy S24 Ultra", "Samsung Galaxy S25 Ultra",
+  "Motorola Moto E13", "Motorola Moto E22", "Motorola Moto G8 Plus", "Motorola Moto G20", "Motorola Moto G22", "Motorola Moto G24 Power", "Motorola Moto G32", "Motorola Moto G54 5G", "Motorola Moto G84 5G", "Motorola Moto G85 5G", "Motorola Edge 30 Neo", "Motorola Edge 40 Neo", "Motorola Edge 50 Pro", "Motorola Edge 60 Fusion",
+  "Infinix Hot 11S", "Infinix Hot 12 Play", "Infinix Hot 30i", "Infinix Hot 40 Pro", "Infinix Hot 50", "Infinix Note 30 Pro", "Infinix Note 40 Pro", "Infinix GT 20 Pro",
+  "Tecno Spark 10 Pro", "Tecno Spark 20 Pro+", "Tecno Pova 6 Pro", "Tecno Camon 30 Pro",
+  "Realme C35", "Realme C53", "Realme C55", "Realme C67", "Realme 11 Pro+", "Realme 12 Pro+", "Realme GT 6",
+  "Honor X7a", "Honor X8a", "Honor X9b 5G", "Honor 90 Lite", "Honor 200 Pro",
+  "Vivo Y20", "Vivo Y21s", "Vivo Y36", "Vivo Y28", "Vivo V30 5G",
+  "Oppo A17", "Oppo A38", "Oppo A58 5G", "Oppo Reno 10 5G", "Oppo Reno 12 Pro",
+  "ZTE Blade A52", "ZTE Nubia RedMagic 8 Pro", "ZTE Nubia RedMagic 9 Pro"
+];
+
+let selectedDevice = devicesList[0];
+let useDpi = false;
+
+const search = document.getElementById("search");
+const deviceList = document.getElementById("devices");
+const btnNoDpi = document.getElementById("btnNoDpi");
+const btnSiDpi = document.getElementById("btnSiDpi");
+
+function renderDevices() {
+  const query = search.value.trim().toLowerCase();
+  const filtered = devicesList.filter(d => d.toLowerCase().includes(query));
+
+  deviceList.innerHTML = "";
+
+  if (filtered.length === 0) {
+    deviceList.innerHTML = '<p class="empty">No encontramos ese modelo. Intenta con otro nombre.</p>';
+    return;
+  }
+
+  if (!filtered.includes(selectedDevice)) {
+    selectedDevice = filtered[0];
+  }
+
+  filtered.slice(0, 30).forEach(device => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "device" + (selectedDevice === device ? " active" : "");
+    btn.textContent = device;
+    btn.onclick = () => {
+      selectedDevice = device;
+      renderDevices();
+    };
+    deviceList.appendChild(btn);
+  });
+}
+
+search.oninput = renderDevices;
+
+btnNoDpi.onclick = () => {
+  useDpi = false;
+  btnNoDpi.classList.add("active");
+  btnSiDpi.classList.remove("active");
+};
+
+btnSiDpi.onclick = () => {
+  useDpi = true;
+  btnSiDpi.classList.add("active");
+  btnNoDpi.classList.remove("active");
+};
+
+function randomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function generate() {
+  if (!selectedDevice) selectedDevice = devicesList[0];
+
+  const style = document.getElementById("style").value;
+  const ranges = { Alta: [155, 200], Media: [105, 165], Baja: [65, 125] };
+  const [min, max] = ranges[style] || ranges["Media"];
+
+  const config = {
+    "General": randomInt(min, max),
+    "Punto rojo": randomInt(min - 8, max - 4),
+    "Mira 2x": randomInt(min - 20, max - 12),
+    "Mira 4x": randomInt(min - 35, max - 25),
+    "Mira francotirador": randomInt(20, 100),
+    "Cámara libre": randomInt(min - 15, max)
+  };
+
+  document.getElementById("resultStyle").textContent = "ESTILO " + style.toUpperCase();
+  document.getElementById("resultDevice").textContent = selectedDevice + " · " + (useDpi ? "Con DPI" : "Sin DPI");
+
+  const grid = document.getElementById("sensiGrid");
+  grid.innerHTML = "";
+
+  Object.entries(config).forEach(([name, val]) => {
+    const card = document.createElement("div");
+    card.className = "sensi-card";
+    card.innerHTML = `<span>${name}</span><strong>${Math.max(0, Math.min(200, val))}</strong>`;
+    grid.appendChild(card);
+  });
+
+  const dpiBox = document.getElementById("dpiBox");
+  if (useDpi) {
+    dpiBox.classList.add("show");
+    document.getElementById("dpiValue").textContent = randomInt(580, 780) + " DPI";
+  } else {
+    dpiBox.classList.remove("show");
+  }
+
+  const resultElem = document.getElementById("result");
+  resultElem.classList.add("show");
+  resultElem.scrollIntoView({ behavior: "smooth" });
+}
+
+document.getElementById("generate").onclick = generate;
+document.getElementById("again").onclick = generate;
+
+document.getElementById("copy").onclick = () => {
+  const dev = document.getElementById("resultDevice").textContent;
+  let text = `🔥 Sensi Z - Free Fire\n📱 Dispositivo: ${dev}\n`;
+  
+  document.querySelectorAll(".sensi-card").forEach(card => {
+    text += `- ${card.querySelector("span").textContent}: ${card.querySelector("strong").textContent}\n`;
+  });
+
+  if (useDpi) {
+    text += `- DPI: ${document.getElementById("dpiValue").textContent}\n`;
+  }
+
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById("copy");
+    const orig = btn.textContent;
+    btn.textContent = "✓ ¡COPIADO AL PORTAPAPELES!";
+    setTimeout(() => { btn.textContent = orig; }, 2000);
+  });
+};
+
+// Ejecutar de inmediato al cargar para que aparezcan los celulares en pantalla
+renderDevices();
+</script>
+
+</body>
+</html>
