@@ -12,8 +12,10 @@
 :root {
   --neon: #39ff14;
   --green: #00ff88;
-  --bg: #030805;
+  --bg: #050807;
+  --card: #0b1210;
   --text: #effff3;
+  --muted: #82958a;
 }
 
 * {
@@ -26,8 +28,8 @@ html { scroll-behavior: smooth; }
 
 body {
   background:
-    radial-gradient(ellipse at 50% 0%, #10321b 0%, transparent 45%),
-    #030805;
+    radial-gradient(ellipse at 50% 0%, #10321b 0%, transparent 43%),
+    var(--bg);
   color: var(--text);
   font-family: 'Rajdhani', sans-serif;
   min-height: 100vh;
@@ -40,7 +42,7 @@ body::before {
   inset: 0;
   pointer-events: none;
   z-index: -1;
-  opacity: .17;
+  opacity: .14;
   background-image:
     linear-gradient(#39ff1410 1px, transparent 1px),
     linear-gradient(90deg, #39ff1410 1px, transparent 1px);
@@ -55,71 +57,65 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 16px 7%;
-  background: #030805ed;
-  border-bottom: 1px solid #39ff1460;
+  background: #050807eF;
+  border-bottom: 1px solid #39ff1433;
   backdrop-filter: blur(16px);
 }
 
 .logo {
   font: 900 25px 'Orbitron', sans-serif;
-  color: white;
+  color: var(--neon);
   letter-spacing: 2px;
-  text-shadow: 0 0 15px #39ff1470;
+  text-shadow: 0 0 18px #39ff1480;
+  animation: logoPulse 3s infinite;
 }
 
-.logo span { color: var(--neon); }
+.logo span { color: white; }
 
 .header-tag {
-  font: 800 13px 'Orbitron', sans-serif;
-  color: white;
-  letter-spacing: 1px;
-}
-
-.header-tag span {
-  color: var(--neon);
-  text-shadow: 0 0 12px var(--neon);
+  font-size: 13px;
+  color: var(--green);
+  letter-spacing: 2px;
 }
 
 main {
-  width: min(1180px, 94%);
+  width: min(950px, 92%);
   margin: auto;
 }
 
 .hero {
   text-align: center;
-  padding: 55px 0 15px;
+  padding: 65px 0 35px;
   animation: appear .8s ease both;
 }
 
 .pill {
   display: inline-block;
-  border: 1px solid var(--neon);
+  border: 1px solid #39ff1460;
   color: var(--neon);
-  background: #39ff1410;
+  background: #39ff140b;
   border-radius: 30px;
-  padding: 9px 20px;
-  font: 800 13px 'Orbitron', sans-serif;
-  margin-bottom: 18px;
-  box-shadow: 0 0 18px #39ff1430;
+  padding: 7px 16px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  margin-bottom: 22px;
 }
 
 h1 {
-  font: 900 clamp(38px, 8vw, 76px) 'Orbitron', sans-serif;
-  line-height: 1.12;
+  font: 900 clamp(36px, 8vw, 72px) 'Orbitron', sans-serif;
+  line-height: 1.15;
   letter-spacing: -2px;
-  color: white;
-  text-shadow: 0 0 15px #ffffff25;
 }
 
 h1 span {
   color: var(--neon);
-  text-shadow: 0 0 25px #39ff1480;
+  text-shadow: 0 0 30px #39ff1455;
 }
 
 .hero p {
-  max-width: 800px;
-  margin: 15px auto 0;
-  color: #d0ddd3;
+  max-width: 520px;
+  margin: 18px auto 0;
+  color: #a6b8ad;
   font-size: 19px;
 }
 
@@ -127,44 +123,41 @@ h1 span {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 14px;
-  margin-top: 22px;
+  gap: 12px;
+  margin-top: 25px;
 }
 
 .stat {
-  min-width: 175px;
-  border: 1px solid #39ff1480;
-  background: #030805d9;
-  border-radius: 15px;
-  padding: 12px 18px;
-  color: white;
-  font-size: 16px;
-  box-shadow: 0 0 14px #39ff1415;
+  border: 1px solid #39ff142b;
+  background: #0b1210b0;
+  border-radius: 10px;
+  padding: 9px 17px;
+  color: #c8d9cd;
+  font-size: 14px;
 }
 
 .stat strong { color: var(--neon); }
 
 .panel {
-  background: linear-gradient(145deg, #07150b, #020603);
-  border: 1px solid #39ff14a0;
-  border-radius: 22px;
+  background: linear-gradient(145deg, #101a14, #080d0b);
+  border: 1px solid #39ff1445;
+  border-radius: 20px;
   padding: clamp(18px, 4vw, 32px);
   margin: 25px 0;
-  box-shadow: 0 0 30px #39ff1418, inset 0 0 25px #39ff1408;
+  box-shadow: 0 0 45px #39ff1408;
   animation: appear .8s ease both;
 }
 
 .section-title {
-  font: 800 18px 'Orbitron', sans-serif;
+  font: 700 18px 'Orbitron', sans-serif;
   margin-bottom: 20px;
-  color: white;
 }
 
 .section-title span { color: var(--neon); }
 
 label {
   display: block;
-  color: #d2e2d6;
+  color: #c1d1c6;
   font-size: 16px;
   margin-bottom: 8px;
 }
@@ -176,19 +169,18 @@ label {
   left: 15px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 22px;
+  font-size: 20px;
   pointer-events: none;
-  color: var(--neon);
 }
 
 input, select {
   width: 100%;
-  background: #030805;
+  background: #050907;
   color: white;
-  border: 1px solid #31583a;
-  border-radius: 11px;
+  border: 1px solid #304637;
+  border-radius: 10px;
   padding: 14px;
-  font: 600 17px 'Rajdhani', sans-serif;
+  font: 500 17px 'Rajdhani', sans-serif;
   outline: none;
   transition: .25s;
 }
@@ -197,11 +189,11 @@ input { padding-left: 45px; }
 
 input:focus, select:focus {
   border-color: var(--neon);
-  box-shadow: 0 0 15px #39ff1430;
+  box-shadow: 0 0 14px #39ff1420;
 }
 
 select { cursor: pointer; }
-select option { background: #07150b; }
+select option { background: #0b1210; }
 
 .device-results {
   margin-top: 12px;
@@ -210,42 +202,41 @@ select option { background: #07150b; }
   gap: 9px;
   max-height: 260px;
   overflow-y: auto;
-  border: 1px solid #24452c;
-  background: #030805;
-  border-radius: 12px;
+  padding-right: 4px;
+  border: 1px solid #1a2e20;
+  background: #040705;
+  border-radius: 10px;
   padding: 10px;
 }
 
 .device-results::-webkit-scrollbar { width: 6px; }
 .device-results::-webkit-scrollbar-track { background: #080e0a; }
-.device-results::-webkit-scrollbar-thumb {
-  background: #39ff1470;
-  border-radius: 10px;
-}
+.device-results::-webkit-scrollbar-thumb { background: #263c2c; border-radius: 10px; }
 
 .device {
   text-align: left;
-  background: #0b190e;
-  color: #d4e3d8;
-  border: 1px solid #29452f;
+  background: #101913;
+  color: #cbd8ce;
+  border: 1px solid #263c2c;
   border-radius: 9px;
   padding: 12px;
   font: 600 15px 'Rajdhani', sans-serif;
   cursor: pointer;
-  transition: .2s;
+  transition: .25s;
 }
 
 .device:hover {
   transform: translateY(-2px);
   border-color: var(--neon);
   color: var(--neon);
+  background: #14231a;
 }
 
 .device.active {
   border-color: var(--neon);
   color: var(--neon);
-  background: #15351b;
-  box-shadow: 0 0 12px #39ff1425;
+  background: #17321b;
+  box-shadow: inset 0 0 15px #39ff1410;
 }
 
 .empty {
@@ -270,8 +261,8 @@ select option { background: #07150b; }
 
 .dpi-option {
   background: #080e0a;
-  color: #c5d7ca;
-  border: 1px solid #31583a;
+  color: #b8c8bc;
+  border: 1px solid #304637;
   border-radius: 10px;
   padding: 14px 8px;
   cursor: pointer;
@@ -279,37 +270,35 @@ select option { background: #07150b; }
   transition: .25s;
 }
 
-.dpi-option:hover { border-color: var(--neon); }
+.dpi-option:hover { border-color: var(--green); }
 
 .dpi-option.active {
   background: #15351d;
   color: var(--neon);
   border-color: var(--neon);
-  box-shadow: 0 0 15px #39ff1430;
+  box-shadow: 0 0 15px #39ff141a;
 }
 
 .primary-btn {
   width: 100%;
   margin-top: 25px;
   border: 1px solid var(--neon);
-  border-radius: 13px;
+  border-radius: 10px;
   padding: 17px;
   color: #031006;
   background: var(--neon);
   font: 900 16px 'Orbitron', sans-serif;
   letter-spacing: 1px;
   cursor: pointer;
-  box-shadow: 0 0 22px #39ff1440;
-  transition: .2s;
+  box-shadow: 0 0 22px #39ff1425;
+  transition: transform .2s, box-shadow .2s, background .2s;
 }
 
 .primary-btn:hover {
   transform: translateY(-3px);
   background: #75ff5d;
-  box-shadow: 0 0 30px #39ff1470;
+  box-shadow: 0 0 32px #39ff1460;
 }
-
-/* RESULTADOS */
 
 .result { display: none; }
 
@@ -328,237 +317,108 @@ select option { background: #07150b; }
 }
 
 .result-heading h2 {
-  font: 800 clamp(16px, 3vw, 23px) 'Orbitron', sans-serif;
+  font: 700 19px 'Orbitron', sans-serif;
   color: var(--neon);
-  text-shadow: 0 0 12px #39ff1450;
 }
 
 .tag {
-  border: 1px solid var(--neon);
+  border: 1px solid #39ff1455;
   color: var(--neon);
-  padding: 8px 13px;
-  border-radius: 25px;
-  font: 800 12px 'Orbitron', sans-serif;
-  box-shadow: 0 0 12px #39ff1425;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
 }
 
 .result-device {
-  color: #e0ebe3;
-  margin-bottom: 18px;
-  font-size: 18px;
-  font-weight: 700;
+  color: #c0d2c5;
+  margin-bottom: 20px;
+  font-size: 17px;
 }
-
-/* SEIS TARJETAS DE SENSIBILIDAD */
 
 .sensi-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 12px;
 }
 
 .sensi-card {
-  min-height: 75px;
-  display: flex;
-  align-items: center;
-  gap: 13px;
-  border: 1px solid #32623a;
-  border-radius: 17px;
-  background: linear-gradient(120deg, #0b160e, #030805);
-  padding: 12px;
-  transition: .2s;
-  box-shadow: inset 0 0 15px #39ff1408;
+  border: 1px solid #253c2b;
+  border-radius: 12px;
+  background: #070c09;
+  padding: 17px;
 }
 
-.sensi-card:hover {
-  border-color: var(--neon);
-  box-shadow: 0 0 15px #39ff1425;
-  transform: translateY(-2px);
-}
-
-.sensi-icon {
-  width: 48px;
-  height: 48px;
-  min-width: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #39ff1450;
-  border-radius: 50%;
-  background: #07120a;
-  font-size: 25px;
-}
-
-.sensi-info span {
-  display: block;
-  color: white;
-  font-size: 14px;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.sensi-info strong {
-  display: block;
-  color: var(--neon);
-  font: 900 clamp(21px, 3vw, 31px) 'Orbitron', sans-serif;
-  margin-top: 3px;
-  text-shadow: 0 0 12px #39ff1460;
-}
-
-/* BOTÓN DE DISPARO SEPARADO */
-
-.fire-box {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 15px;
-  margin-top: 17px;
-  padding: 15px 22px;
-  min-height: 88px;
-  border: 2px solid var(--neon);
-  border-radius: 17px;
-  background: linear-gradient(110deg, #102d14, #030804);
-  box-shadow: 0 0 20px #39ff1440, inset 0 0 20px #39ff1410;
-}
-
-.fire-left {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.fire-icon {
-  width: 58px;
-  height: 58px;
-  min-width: 58px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid var(--neon);
-  border-radius: 50%;
-  background: #17391b;
-  font-size: 29px;
-  box-shadow: 0 0 17px #39ff1450;
-}
-
-.fire-info h3 {
-  font: 900 16px 'Orbitron', sans-serif;
-  color: white;
-}
-
-.fire-info p {
-  color: #c5d8ca;
+.sensi-card span {
+  color: #a1b4a6;
   font-size: 15px;
-  margin-top: 4px;
 }
 
-.fire-value {
+.sensi-card strong {
+  display: block;
   color: var(--neon);
-  font: 900 clamp(29px, 5vw, 40px) 'Orbitron', sans-serif;
-  text-shadow: 0 0 18px #39ff1480;
+  font: 800 clamp(24px, 5vw, 34px) 'Orbitron', sans-serif;
+  margin-top: 10px;
 }
-
-/* DPI */
 
 .dpi-box {
   display: none;
-  position: relative;
-  overflow: hidden;
-  margin-top: 17px;
-  padding: 20px;
-  background: linear-gradient(110deg, #102d14, #030804);
-  border: 1px solid var(--neon);
-  border-radius: 17px;
-  box-shadow: 0 0 17px #39ff1425;
+  margin-top: 12px;
+  padding: 18px;
+  background: #14291a;
+  border: 1px solid #39ff1455;
+  border-radius: 12px;
 }
 
 .dpi-box.show { display: block; }
 
-.dpi-content {
-  display: flex;
-  align-items: center;
-  gap: 17px;
-}
-
-.dpi-icon {
-  width: 60px;
-  height: 60px;
-  min-width: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #39ff1470;
-  border-radius: 50%;
-  background: #07120a;
-  font-size: 30px;
-}
-
-.dpi-box span {
-  color: white;
-  font-size: 16px;
-  font-weight: 700;
-}
-
 .dpi-box strong {
-  display: block;
   color: var(--neon);
-  font: 900 clamp(25px, 5vw, 38px) 'Orbitron', sans-serif;
-  margin-top: 4px;
-  text-shadow: 0 0 15px #39ff1470;
+  font: 800 27px 'Orbitron', sans-serif;
 }
 
 .dpi-box p {
-  color: #c0d1c5;
+  color: #a6b8ad;
   font-size: 14px;
-  margin-top: 10px;
-  line-height: 1.4;
+  margin-top: 6px;
 }
 
 .note {
-  color: #c2d0c6;
-  font-size: 15px;
+  color: #839789;
+  font-size: 14px;
   line-height: 1.5;
   margin-top: 18px;
-  padding-top: 15px;
-  border-top: 1px solid #31583a;
 }
 
 .secondary-btn {
-  width: min(580px, 100%);
-  display: block;
-  margin: 12px auto 0;
+  width: 100%;
   background: transparent;
-  border: 2px solid var(--neon);
-  border-radius: 14px;
+  border: 1px solid #39ff1470;
+  border-radius: 10px;
   color: var(--neon);
   padding: 14px;
-  font: 800 14px 'Orbitron', sans-serif;
+  margin-top: 12px;
+  font: 700 14px 'Orbitron', sans-serif;
   cursor: pointer;
   transition: .25s;
 }
 
-.secondary-btn:hover {
-  background: #39ff1420;
-  box-shadow: 0 0 17px #39ff1440;
-  transform: translateY(-2px);
-}
+.secondary-btn:hover { background: #39ff1418; }
 
 footer {
   margin-top: 55px;
   padding: 40px 20px;
   text-align: center;
-  border-top: 1px solid #39ff1440;
+  border-top: 1px solid #39ff142b;
   background: #030605;
 }
 
 .footer-logo {
   font: 900 24px 'Orbitron', sans-serif;
   color: var(--neon);
-  text-shadow: 0 0 15px #39ff1460;
 }
 
 .slogan {
-  font: 800 clamp(17px, 4vw, 23px) 'Orbitron', sans-serif;
+  font: 700 clamp(17px, 4vw, 23px) 'Orbitron', sans-serif;
   margin-top: 15px;
   color: white;
 }
@@ -567,7 +427,7 @@ footer {
 
 footer p {
   margin-top: 15px;
-  color: #82958a;
+  color: #718578;
   font-size: 14px;
 }
 
@@ -576,27 +436,10 @@ footer p {
   to { opacity: 1; transform: translateY(0); }
 }
 
-@media (max-width: 700px) {
-  main { width: 94%; }
-  .sensi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .hero { padding-top: 40px; }
-}
-
 @media (max-width: 540px) {
   header { padding: 14px 5%; }
-  .logo { font-size: 20px; }
-  .header-tag { font-size: 11px; }
+  .logo { font-size: 21px; }
   .field-grid { grid-template-columns: 1fr; }
-  .device-results { grid-template-columns: 1fr; }
-  .fire-box { padding: 12px; gap: 8px; }
-  .fire-icon { width: 47px; height: 47px; min-width: 47px; font-size: 23px; }
-  .fire-info h3 { font-size: 11px; }
-  .fire-info p { font-size: 12px; }
-  .fire-value { font-size: 27px; }
-  .sensi-card { padding: 9px; gap: 8px; }
-  .sensi-icon { width: 39px; height: 39px; min-width: 39px; font-size: 20px; }
-  .sensi-info span { font-size: 11px; }
-  .sensi-info strong { font-size: 21px; }
 }
 </style>
 </head>
@@ -605,7 +448,7 @@ footer p {
 
 <header>
   <div class="logo">SENSI <span>Z</span></div>
-  <div class="header-tag"><span>●</span> FREE FIRE</div>
+  <div class="header-tag">● FREE FIRE</div>
 </header>
 
 <main>
@@ -626,7 +469,6 @@ footer p {
     <div class="section-title"><span>01.</span> ELIGE TU DISPOSITIVO</div>
 
     <label for="search">Busca tu celular (Ej. iPhone 11, Huawei Y5, Redmi Note 13...)</label>
-
     <div class="search-wrap">
       <span class="search-icon">⌕</span>
       <input id="search" type="search" placeholder="Escribe el modelo de tu teléfono..." autocomplete="off">
@@ -657,9 +499,8 @@ footer p {
   </section>
 
   <section class="panel result" id="result" aria-live="polite">
-
     <div class="result-heading">
-      <h2>🏆 ✦ TU CONFIGURACIÓN</h2>
+      <h2>✦ TU CONFIGURACIÓN</h2>
       <span class="tag" id="resultStyle">ESTILO MEDIO</span>
     </div>
 
@@ -667,37 +508,19 @@ footer p {
 
     <div class="sensi-grid" id="sensiGrid"></div>
 
-    <!-- BOTÓN DE DISPARO INDEPENDIENTE -->
-    <div class="fire-box">
-      <div class="fire-left">
-        <div class="fire-icon">🎯</div>
-        <div class="fire-info">
-          <h3>BOTÓN DE DISPARO</h3>
-          <p>Recomendado para tu dispositivo</p>
-        </div>
-      </div>
-      <div class="fire-value" id="fireValue">52</div>
-    </div>
-
-    <!-- DPI -->
     <div class="dpi-box" id="dpiBox">
-      <div class="dpi-content">
-        <div class="dpi-icon">📱</div>
-        <div>
-          <span>📲 DPI sugerido (Android)</span>
-          <strong id="dpiValue"></strong>
-        </div>
-      </div>
+      <span>📲 DPI sugerido (Android)</span>
+      <br><br>
+      <strong id="dpiValue"></strong>
       <p>Es una sugerencia orientativa. Comprueba la compatibilidad y anota tu valor original antes de cambiar los ajustes del sistema.</p>
     </div>
 
     <p class="note">
-      🟢 Esta combinación se genera automáticamente. Pruébala en el campo de entrenamiento y ajusta los valores según tu pantalla, controles y comodidad.
+      Esta combinación se genera automáticamente. Pruébala en el campo de entrenamiento y ajusta los valores según tu pantalla, controles y comodidad.
     </p>
 
     <button class="secondary-btn" id="again" type="button">↻ GENERAR OTRA SENSIBILIDAD</button>
     <button class="secondary-btn" id="copy" type="button">▣ COPIAR CONFIGURACIÓN</button>
-
   </section>
 
 </main>
@@ -752,62 +575,120 @@ const btnSiDpi = document.getElementById("btnSiDpi");
 
 function renderDevices() {
   const query = search.value.trim().toLowerCase();
-
-  const filtered = devicesList.filter(device =>
-    device.toLowerCase().includes(query)
-  );
+  const filtered = devicesList.filter(d => d.toLowerCase().includes(query));
 
   deviceList.innerHTML = "";
 
   if (filtered.length === 0) {
-    const empty = document.createElement("p");
-    empty.className = "empty";
-    empty.textContent = "No encontramos ese modelo. Intenta con otro nombre.";
-    deviceList.appendChild(empty);
+    deviceList.innerHTML = '<p class="empty">No encontramos ese modelo. Intenta con otro nombre.</p>';
     return;
+  }
+
+  if (!filtered.includes(selectedDevice)) {
+    selectedDevice = filtered[0];
   }
 
   filtered.slice(0, 30).forEach(device => {
     const btn = document.createElement("button");
-
     btn.type = "button";
     btn.className = "device" + (selectedDevice === device ? " active" : "");
-    btn.textContent = "📱 " + device;
-
-    btn.addEventListener("click", () => {
+    btn.textContent = device;
+    btn.onclick = () => {
       selectedDevice = device;
       renderDevices();
-    });
-
+    };
     deviceList.appendChild(btn);
   });
 }
 
-search.addEventListener("input", renderDevices);
+search.oninput = renderDevices;
 
-btnNoDpi.addEventListener("click", () => {
+btnNoDpi.onclick = () => {
   useDpi = false;
   btnNoDpi.classList.add("active");
   btnSiDpi.classList.remove("active");
-});
+};
 
-btnSiDpi.addEventListener("click", () => {
+btnSiDpi.onclick = () => {
   useDpi = true;
   btnSiDpi.classList.add("active");
   btnNoDpi.classList.remove("active");
-});
+};
 
 function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function generate() {
-  const style = document.getElementById("style").value;
+  if (!selectedDevice) selectedDevice = devicesList[0];
 
-  const ranges = {
-    Alta: [155, 200],
-    Media: [105, 165],
-    Baja: [65, 125]
+  const style = document.getElementById("style").value;
+  const ranges = { Alta: [155, 200], Media: [105, 165], Baja: [65, 125] };
+  const [min, max] = ranges[style] || ranges["Media"];
+
+  const config = {
+    "General": randomInt(min, max),
+    "Punto rojo": randomInt(min - 8, max - 4),
+    "Mira 2x": randomInt(min - 20, max - 12),
+    "Mira 4x": randomInt(min - 35, max - 25),
+    "Mira francotirador": randomInt(20, 100),
+    "Cámara libre": randomInt(min - 15, max),
+
+    // NUEVO: BOTÓN DE DISPARO
+    "BOTÓN DE DISPARO": randomInt(45, 60)
   };
 
-  const [min, max] = ranges[st
+  document.getElementById("resultStyle").textContent = "ESTILO " + style.toUpperCase();
+  document.getElementById("resultDevice").textContent = selectedDevice + " · " + (useDpi ? "Con DPI" : "Sin DPI");
+
+  const grid = document.getElementById("sensiGrid");
+  grid.innerHTML = "";
+
+  Object.entries(config).forEach(([name, val]) => {
+    const card = document.createElement("div");
+    card.className = "sensi-card";
+    card.innerHTML = `<span>${name}</span><strong>${Math.max(0, Math.min(200, val))}</strong>`;
+    grid.appendChild(card);
+  });
+
+  const dpiBox = document.getElementById("dpiBox");
+  if (useDpi) {
+    dpiBox.classList.add("show");
+    document.getElementById("dpiValue").textContent = randomInt(580, 780) + " DPI";
+  } else {
+    dpiBox.classList.remove("show");
+  }
+
+  const resultElem = document.getElementById("result");
+  resultElem.classList.add("show");
+  resultElem.scrollIntoView({ behavior: "smooth" });
+}
+
+document.getElementById("generate").onclick = generate;
+document.getElementById("again").onclick = generate;
+
+document.getElementById("copy").onclick = () => {
+  const dev = document.getElementById("resultDevice").textContent;
+  let text = `🔥 Sensi Z - Free Fire\n📱 Dispositivo: ${dev}\n`;
+
+  document.querySelectorAll(".sensi-card").forEach(card => {
+    text += `- ${card.querySelector("span").textContent}: ${card.querySelector("strong").textContent}\n`;
+  });
+
+  if (useDpi) {
+    text += `- DPI: ${document.getElementById("dpiValue").textContent}\n`;
+  }
+
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById("copy");
+    const orig = btn.textContent;
+    btn.textContent = "✓ ¡COPIADO AL PORTAPAPELES!";
+    setTimeout(() => { btn.textContent = orig; }, 2000);
+  });
+};
+
+renderDevices();
+</script>
+
+</body>
+</html>
