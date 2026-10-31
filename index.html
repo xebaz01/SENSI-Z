@@ -12,20 +12,22 @@
 :root {
   --neon: #39ff14;
   --green: #00ff88;
-  --bg: #050807;
-  --card: #0b1210;
+  --bg: #030805;
   --text: #effff3;
-  --muted: #82958a;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 html { scroll-behavior: smooth; }
 
 body {
   background:
-    radial-gradient(ellipse at 50% 0%, #10321b 0%, transparent 43%),
-    radial-gradient(ellipse at 50% 100%, #063012 0%, transparent 35%),
-    var(--bg);
+    radial-gradient(ellipse at 50% 0%, #10321b 0%, transparent 45%),
+    #030805;
   color: var(--text);
   font-family: 'Rajdhani', sans-serif;
   min-height: 100vh;
@@ -38,7 +40,7 @@ body::before {
   inset: 0;
   pointer-events: none;
   z-index: -1;
-  opacity: .14;
+  opacity: .17;
   background-image:
     linear-gradient(#39ff1410 1px, transparent 1px),
     linear-gradient(90deg, #39ff1410 1px, transparent 1px);
@@ -53,65 +55,72 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 16px 7%;
-  background: #050807ef;
-  border-bottom: 1px solid #39ff1470;
+  background: #030805ed;
+  border-bottom: 1px solid #39ff1460;
   backdrop-filter: blur(16px);
 }
 
 .logo {
   font: 900 25px 'Orbitron', sans-serif;
-  color: var(--neon);
+  color: white;
   letter-spacing: 2px;
-  text-shadow: 0 0 18px #39ff1480;
-  animation: logoPulse 3s infinite;
+  text-shadow: 0 0 15px #39ff1470;
 }
-.logo span { color: white; }
+
+.logo span { color: var(--neon); }
 
 .header-tag {
-  font-size: 13px;
-  color: var(--green);
-  letter-spacing: 2px;
-  font-weight: 700;
+  font: 800 13px 'Orbitron', sans-serif;
+  color: white;
+  letter-spacing: 1px;
 }
 
-main { width: min(1180px, 92%); margin: auto; }
+.header-tag span {
+  color: var(--neon);
+  text-shadow: 0 0 12px var(--neon);
+}
+
+main {
+  width: min(1180px, 94%);
+  margin: auto;
+}
 
 .hero {
   text-align: center;
-  padding: 55px 0 30px;
+  padding: 55px 0 15px;
   animation: appear .8s ease both;
 }
 
 .pill {
   display: inline-block;
-  border: 1px solid #39ff14;
+  border: 1px solid var(--neon);
   color: var(--neon);
   background: #39ff1410;
   border-radius: 30px;
-  padding: 8px 19px;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  margin-bottom: 20px;
+  padding: 9px 20px;
+  font: 800 13px 'Orbitron', sans-serif;
+  margin-bottom: 18px;
   box-shadow: 0 0 18px #39ff1430;
 }
 
 h1 {
-  font: 900 clamp(36px, 8vw, 76px) 'Orbitron', sans-serif;
+  font: 900 clamp(38px, 8vw, 76px) 'Orbitron', sans-serif;
   line-height: 1.12;
   letter-spacing: -2px;
-  text-shadow: 0 4px 20px #000;
+  color: white;
+  text-shadow: 0 0 15px #ffffff25;
 }
+
 h1 span {
   color: var(--neon);
-  text-shadow: 0 0 30px #39ff1470;
+  text-shadow: 0 0 25px #39ff1480;
 }
 
 .hero p {
-  max-width: 850px;
-  margin: 16px auto 0;
-  color: #e0ebe3;
-  font-size: clamp(16px, 2vw, 19px);
+  max-width: 800px;
+  margin: 15px auto 0;
+  color: #d0ddd3;
+  font-size: 19px;
 }
 
 .stats {
@@ -119,73 +128,80 @@ h1 span {
   justify-content: center;
   flex-wrap: wrap;
   gap: 14px;
-  margin-top: 23px;
+  margin-top: 22px;
 }
 
 .stat {
-  border: 1px solid #39ff14;
-  background: #050b07d9;
+  min-width: 175px;
+  border: 1px solid #39ff1480;
+  background: #030805d9;
   border-radius: 15px;
-  padding: 11px 22px;
-  color: #e9f5ec;
+  padding: 12px 18px;
+  color: white;
   font-size: 16px;
-  font-weight: 700;
-  min-width: 160px;
-  box-shadow: 0 0 13px #39ff1415;
+  box-shadow: 0 0 14px #39ff1415;
 }
+
 .stat strong { color: var(--neon); }
 
 .panel {
-  background: linear-gradient(145deg, #06140aef, #020604f5);
-  border: 1.5px solid #39ff14;
+  background: linear-gradient(145deg, #07150b, #020603);
+  border: 1px solid #39ff14a0;
   border-radius: 22px;
-  padding: clamp(18px, 4vw, 30px);
+  padding: clamp(18px, 4vw, 32px);
   margin: 25px 0;
-  box-shadow: 0 0 28px #39ff1420, inset 0 0 25px #39ff1408;
+  box-shadow: 0 0 30px #39ff1418, inset 0 0 25px #39ff1408;
   animation: appear .8s ease both;
 }
 
 .section-title {
-  font: 700 18px 'Orbitron', sans-serif;
+  font: 800 18px 'Orbitron', sans-serif;
   margin-bottom: 20px;
+  color: white;
 }
+
 .section-title span { color: var(--neon); }
 
 label {
   display: block;
-  color: #d6e5da;
+  color: #d2e2d6;
   font-size: 16px;
   margin-bottom: 8px;
 }
 
 .search-wrap { position: relative; }
+
 .search-icon {
   position: absolute;
   left: 15px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 20px;
+  font-size: 22px;
   pointer-events: none;
+  color: var(--neon);
 }
 
 input, select {
   width: 100%;
   background: #030805;
   color: white;
-  border: 1px solid #39ff1470;
-  border-radius: 10px;
+  border: 1px solid #31583a;
+  border-radius: 11px;
   padding: 14px;
-  font: 500 17px 'Rajdhani', sans-serif;
+  font: 600 17px 'Rajdhani', sans-serif;
   outline: none;
   transition: .25s;
 }
+
 input { padding-left: 45px; }
+
 input:focus, select:focus {
   border-color: var(--neon);
-  box-shadow: 0 0 14px #39ff1440;
+  box-shadow: 0 0 15px #39ff1430;
 }
+
 select { cursor: pointer; }
-select option { background: #0b1210; }
+select option { background: #07150b; }
 
 .device-results {
   margin-top: 12px;
@@ -194,38 +210,44 @@ select option { background: #0b1210; }
   gap: 9px;
   max-height: 260px;
   overflow-y: auto;
-  border: 1px solid #39ff1445;
-  background: #020604;
-  border-radius: 10px;
+  border: 1px solid #24452c;
+  background: #030805;
+  border-radius: 12px;
   padding: 10px;
 }
+
 .device-results::-webkit-scrollbar { width: 6px; }
 .device-results::-webkit-scrollbar-track { background: #080e0a; }
-.device-results::-webkit-scrollbar-thumb { background: #39ff1470; border-radius: 10px; }
+.device-results::-webkit-scrollbar-thumb {
+  background: #39ff1470;
+  border-radius: 10px;
+}
 
 .device {
   text-align: left;
-  background: #09140c;
-  color: #d9e7dc;
-  border: 1px solid #28452d;
+  background: #0b190e;
+  color: #d4e3d8;
+  border: 1px solid #29452f;
   border-radius: 9px;
   padding: 12px;
   font: 600 15px 'Rajdhani', sans-serif;
   cursor: pointer;
-  transition: .25s;
+  transition: .2s;
 }
+
 .device:hover {
   transform: translateY(-2px);
   border-color: var(--neon);
   color: var(--neon);
-  background: #14231a;
 }
+
 .device.active {
   border-color: var(--neon);
   color: var(--neon);
-  background: #17321b;
-  box-shadow: inset 0 0 15px #39ff1420;
+  background: #15351b;
+  box-shadow: 0 0 12px #39ff1425;
 }
+
 .empty {
   color: #a6b8ad;
   grid-column: 1 / -1;
@@ -239,22 +261,26 @@ select option { background: #0b1210; }
   gap: 16px;
   margin-top: 22px;
 }
+
 .dpi-options {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
 }
+
 .dpi-option {
   background: #080e0a;
-  color: #b8c8bc;
-  border: 1px solid #39ff1470;
+  color: #c5d7ca;
+  border: 1px solid #31583a;
   border-radius: 10px;
   padding: 14px 8px;
   cursor: pointer;
   font: 700 16px 'Rajdhani', sans-serif;
   transition: .25s;
 }
-.dpi-option:hover { border-color: var(--green); }
+
+.dpi-option:hover { border-color: var(--neon); }
+
 .dpi-option.active {
   background: #15351d;
   color: var(--neon);
@@ -266,7 +292,7 @@ select option { background: #0b1210; }
   width: 100%;
   margin-top: 25px;
   border: 1px solid var(--neon);
-  border-radius: 10px;
+  border-radius: 13px;
   padding: 17px;
   color: #031006;
   background: var(--neon);
@@ -274,15 +300,19 @@ select option { background: #0b1210; }
   letter-spacing: 1px;
   cursor: pointer;
   box-shadow: 0 0 22px #39ff1440;
-  transition: transform .2s, box-shadow .2s, background .2s;
+  transition: .2s;
 }
+
 .primary-btn:hover {
   transform: translateY(-3px);
   background: #75ff5d;
-  box-shadow: 0 0 32px #39ff1460;
+  box-shadow: 0 0 30px #39ff1470;
 }
 
+/* RESULTADOS */
+
 .result { display: none; }
+
 .result.show {
   display: block;
   animation: appear .55s ease both;
@@ -296,210 +326,220 @@ select option { background: #0b1210; }
   flex-wrap: wrap;
   margin-bottom: 8px;
 }
+
 .result-heading h2 {
-  font: 800 21px 'Orbitron', sans-serif;
+  font: 800 clamp(16px, 3vw, 23px) 'Orbitron', sans-serif;
   color: var(--neon);
-  text-shadow: 0 0 15px #39ff1460;
+  text-shadow: 0 0 12px #39ff1450;
 }
+
 .tag {
   border: 1px solid var(--neon);
   color: var(--neon);
-  padding: 7px 12px;
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: 700;
+  padding: 8px 13px;
+  border-radius: 25px;
+  font: 800 12px 'Orbitron', sans-serif;
   box-shadow: 0 0 12px #39ff1425;
 }
+
 .result-device {
   color: #e0ebe3;
-  margin-bottom: 17px;
-  font-size: 19px;
+  margin-bottom: 18px;
+  font-size: 18px;
   font-weight: 700;
 }
 
-/* Tarjetas de sensibilidad */
+/* SEIS TARJETAS DE SENSIBILIDAD */
+
 .sensi-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
 }
+
 .sensi-card {
+  min-height: 75px;
   display: flex;
   align-items: center;
   gap: 13px;
-  min-height: 74px;
-  border: 1px solid #3b813f;
-  border-radius: 16px;
-  background: linear-gradient(110deg, #07120a, #020604);
-  padding: 12px 14px;
-  transition: .25s;
+  border: 1px solid #32623a;
+  border-radius: 17px;
+  background: linear-gradient(120deg, #0b160e, #030805);
+  padding: 12px;
+  transition: .2s;
   box-shadow: inset 0 0 15px #39ff1408;
 }
+
 .sensi-card:hover {
   border-color: var(--neon);
-  box-shadow: 0 0 15px #39ff1435;
+  box-shadow: 0 0 15px #39ff1425;
   transform: translateY(-2px);
 }
+
 .sensi-icon {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex: 0 0 48px;
-  width: 48px;
-  height: 48px;
-  border: 1px solid #39ff1445;
+  border: 1px solid #39ff1450;
   border-radius: 50%;
-  background: #050d07;
-  font-size: 24px;
-}
-.sensi-card span {
-  color: #e4eee6;
-  font-size: 15px;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-.sensi-card strong {
-  display: block;
-  color: var(--neon);
-  font: italic 900 clamp(23px, 4vw, 32px) 'Orbitron', sans-serif;
-  margin-top: 3px;
-  text-shadow: 0 0 13px #39ff1460;
+  background: #07120a;
+  font-size: 25px;
 }
 
-/* Botón de disparo independiente */
+.sensi-info span {
+  display: block;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.sensi-info strong {
+  display: block;
+  color: var(--neon);
+  font: 900 clamp(21px, 3vw, 31px) 'Orbitron', sans-serif;
+  margin-top: 3px;
+  text-shadow: 0 0 12px #39ff1460;
+}
+
+/* BOTÓN DE DISPARO SEPARADO */
+
 .fire-box {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 15px;
-  position: relative;
-  overflow: hidden;
-  margin-top: 16px;
-  padding: 14px 22px;
-  min-height: 83px;
+  margin-top: 17px;
+  padding: 15px 22px;
+  min-height: 88px;
   border: 2px solid var(--neon);
   border-radius: 17px;
-  background: linear-gradient(110deg, #0c2810, #020805 80%);
-  box-shadow: 0 0 20px #39ff1450, inset 0 0 20px #39ff1410;
+  background: linear-gradient(110deg, #102d14, #030804);
+  box-shadow: 0 0 20px #39ff1440, inset 0 0 20px #39ff1410;
 }
-.fire-box::after {
-  content: "";
-  position: absolute;
-  right: -40px;
-  top: -50px;
-  width: 140px;
-  height: 190px;
-  background: #39ff1410;
-  transform: rotate(35deg);
-  pointer-events: none;
-}
+
 .fire-left {
   display: flex;
   align-items: center;
   gap: 15px;
-  position: relative;
-  z-index: 1;
 }
+
 .fire-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 58px;
   height: 58px;
   min-width: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 2px solid var(--neon);
   border-radius: 50%;
-  background: #15331a;
+  background: #17391b;
   font-size: 29px;
-  box-shadow: 0 0 18px #39ff1460;
+  box-shadow: 0 0 17px #39ff1450;
 }
+
 .fire-info h3 {
-  font: 800 17px 'Orbitron', sans-serif;
+  font: 900 16px 'Orbitron', sans-serif;
   color: white;
 }
+
 .fire-info p {
-  color: #d2e2d6;
+  color: #c5d8ca;
   font-size: 15px;
-  margin-top: 3px;
+  margin-top: 4px;
 }
+
 .fire-value {
-  position: relative;
-  z-index: 1;
   color: var(--neon);
-  font: italic 900 39px 'Orbitron', sans-serif;
+  font: 900 clamp(29px, 5vw, 40px) 'Orbitron', sans-serif;
   text-shadow: 0 0 18px #39ff1480;
 }
 
 /* DPI */
+
 .dpi-box {
   display: none;
-  align-items: center;
-  gap: 17px;
   position: relative;
   overflow: hidden;
   margin-top: 17px;
-  padding: 17px 20px;
-  background: linear-gradient(110deg, #102b15, #030804);
+  padding: 20px;
+  background: linear-gradient(110deg, #102d14, #030804);
   border: 1px solid var(--neon);
   border-radius: 17px;
-  box-shadow: 0 0 14px #39ff1425;
+  box-shadow: 0 0 17px #39ff1425;
 }
-.dpi-box.show {
-  display: flex;
-  animation: appear .45s ease;
-}
-.dpi-icon {
+
+.dpi-box.show { display: block; }
+
+.dpi-content {
   display: flex;
   align-items: center;
+  gap: 17px;
+}
+
+.dpi-icon {
+  width: 60px;
+  height: 60px;
+  min-width: 60px;
+  display: flex;
   justify-content: center;
-  flex: 0 0 58px;
-  width: 58px;
-  height: 58px;
+  align-items: center;
   border: 1px solid #39ff1470;
   border-radius: 50%;
-  background: #050d07;
-  font-size: 29px;
+  background: #07120a;
+  font-size: 30px;
 }
-.dpi-content { position: relative; z-index: 1; }
+
+.dpi-box span {
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+}
+
 .dpi-box strong {
   display: block;
   color: var(--neon);
-  font: italic 900 clamp(25px, 5vw, 36px) 'Orbitron', sans-serif;
-  text-shadow: 0 0 15px #39ff1470;
-  margin-top: 3px;
-}
-.dpi-box p {
-  color: #b9cbbb;
-  font-size: 14px;
-  line-height: 1.35;
+  font: 900 clamp(25px, 5vw, 38px) 'Orbitron', sans-serif;
   margin-top: 4px;
+  text-shadow: 0 0 15px #39ff1470;
+}
+
+.dpi-box p {
+  color: #c0d1c5;
+  font-size: 14px;
+  margin-top: 10px;
+  line-height: 1.4;
 }
 
 .note {
-  color: #d0ded3;
+  color: #c2d0c6;
   font-size: 15px;
   line-height: 1.5;
   margin-top: 18px;
   padding-top: 15px;
-  border-top: 1px solid #39ff1440;
+  border-top: 1px solid #31583a;
 }
+
 .secondary-btn {
-  display: block;
   width: min(580px, 100%);
+  display: block;
   margin: 12px auto 0;
   background: transparent;
   border: 2px solid var(--neon);
   border-radius: 14px;
   color: var(--neon);
   padding: 14px;
-  font: 800 15px 'Orbitron', sans-serif;
+  font: 800 14px 'Orbitron', sans-serif;
   cursor: pointer;
   transition: .25s;
-  box-shadow: 0 0 12px #39ff1415;
 }
+
 .secondary-btn:hover {
-  background: #39ff1418;
-  box-shadow: 0 0 20px #39ff1445;
+  background: #39ff1420;
+  box-shadow: 0 0 17px #39ff1440;
   transform: translateY(-2px);
 }
 
@@ -510,19 +550,24 @@ footer {
   border-top: 1px solid #39ff1440;
   background: #030605;
 }
+
 .footer-logo {
   font: 900 24px 'Orbitron', sans-serif;
   color: var(--neon);
+  text-shadow: 0 0 15px #39ff1460;
 }
+
 .slogan {
-  font: 700 clamp(17px, 4vw, 23px) 'Orbitron', sans-serif;
+  font: 800 clamp(17px, 4vw, 23px) 'Orbitron', sans-serif;
   margin-top: 15px;
   color: white;
 }
+
 .slogan span { color: var(--neon); }
+
 footer p {
   margin-top: 15px;
-  color: #91a596;
+  color: #82958a;
   font-size: 14px;
 }
 
@@ -530,94 +575,102 @@ footer p {
   from { opacity: 0; transform: translateY(14px); }
   to { opacity: 1; transform: translateY(0); }
 }
-@keyframes logoPulse {
-  0%, 100% { text-shadow: 0 0 12px #39ff1450; }
-  50% { text-shadow: 0 0 23px #39ff14b0; }
-}
 
 @media (max-width: 700px) {
   main { width: 94%; }
-  .hero { padding-top: 42px; }
   .sensi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .sensi-card { padding: 11px 9px; gap: 9px; }
-  .sensi-icon { flex-basis: 39px; width: 39px; height: 39px; font-size: 20px; }
-  .sensi-card span { font-size: 12px; }
-  .field-grid { grid-template-columns: 1fr; }
+  .hero { padding-top: 40px; }
 }
-@media (max-width: 420px) {
+
+@media (max-width: 540px) {
   header { padding: 14px 5%; }
-  .logo { font-size: 21px; }
+  .logo { font-size: 20px; }
   .header-tag { font-size: 11px; }
+  .field-grid { grid-template-columns: 1fr; }
+  .device-results { grid-template-columns: 1fr; }
   .fire-box { padding: 12px; gap: 8px; }
-  .fire-icon { width: 45px; height: 45px; min-width: 45px; font-size: 22px; }
-  .fire-info h3 { font-size: 12px; }
+  .fire-icon { width: 47px; height: 47px; min-width: 47px; font-size: 23px; }
+  .fire-info h3 { font-size: 11px; }
   .fire-info p { font-size: 12px; }
-  .fire-value { font-size: 29px; }
-  .dpi-box { padding: 13px; gap: 11px; }
-  .dpi-icon { flex-basis: 45px; width: 45px; height: 45px; font-size: 23px; }
+  .fire-value { font-size: 27px; }
+  .sensi-card { padding: 9px; gap: 8px; }
+  .sensi-icon { width: 39px; height: 39px; min-width: 39px; font-size: 20px; }
+  .sensi-info span { font-size: 11px; }
+  .sensi-info strong { font-size: 21px; }
 }
 </style>
 </head>
 
 <body>
+
 <header>
   <div class="logo">SENSI <span>Z</span></div>
-  <div class="header-tag">🟢 FREE FIRE</div>
+  <div class="header-tag"><span>●</span> FREE FIRE</div>
 </header>
 
 <main>
+
   <section class="hero">
     <div class="pill">⚡ GENERADOR GAMER</div>
     <h1>DOMINA CON<br><span>SENSI Z</span></h1>
     <p>Encuentra tu próxima sensibilidad. Elige tu celular, configura tu estilo y genera una nueva combinación.</p>
+
     <div class="stats">
       <div class="stat">🎯 <strong>3</strong> estilos</div>
       <div class="stat">📱 <strong>+180</strong> modelos</div>
-      <div class="stat">♾️ <strong>∞</strong> generaciones</div>
+      <div class="stat">♻️ <strong>∞</strong> generaciones</div>
     </div>
   </section>
 
   <section class="panel">
-    <div class="section-title"><span>01.</span> 📱 ELIGE TU DISPOSITIVO</div>
+    <div class="section-title"><span>01.</span> ELIGE TU DISPOSITIVO</div>
+
     <label for="search">Busca tu celular (Ej. iPhone 11, Huawei Y5, Redmi Note 13...)</label>
+
     <div class="search-wrap">
       <span class="search-icon">⌕</span>
       <input id="search" type="search" placeholder="Escribe el modelo de tu teléfono..." autocomplete="off">
     </div>
+
     <div class="device-results" id="devices"></div>
 
     <div class="field-grid">
       <div class="field">
-        <label for="style">🎮 Estilo de sensibilidad</label>
+        <label for="style">Estilo de sensibilidad</label>
         <select id="style">
           <option value="Alta">🔥 Alta</option>
           <option value="Media" selected>⚡ Media</option>
           <option value="Baja">🎯 Baja</option>
         </select>
       </div>
+
       <div class="field">
-        <label>📲 Configuración DPI</label>
+        <label>Configuración DPI</label>
         <div class="dpi-options">
           <button class="dpi-option active" id="btnNoDpi" type="button">Sin DPI</button>
           <button class="dpi-option" id="btnSiDpi" type="button">Con DPI</button>
         </div>
       </div>
     </div>
+
     <button class="primary-btn" id="generate" type="button">⚡ GENERAR SENSIBILIDAD</button>
   </section>
 
   <section class="panel result" id="result" aria-live="polite">
+
     <div class="result-heading">
       <h2>🏆 ✦ TU CONFIGURACIÓN</h2>
-      <span class="tag" id="resultStyle">📊 ESTILO MEDIO</span>
+      <span class="tag" id="resultStyle">ESTILO MEDIO</span>
     </div>
+
     <p class="result-device" id="resultDevice"></p>
 
     <div class="sensi-grid" id="sensiGrid"></div>
 
+    <!-- BOTÓN DE DISPARO INDEPENDIENTE -->
     <div class="fire-box">
       <div class="fire-left">
-        <div class="fire-icon">✏️</div>
+        <div class="fire-icon">🎯</div>
         <div class="fire-info">
           <h3>BOTÓN DE DISPARO</h3>
           <p>Recomendado para tu dispositivo</p>
@@ -626,19 +679,27 @@ footer p {
       <div class="fire-value" id="fireValue">52</div>
     </div>
 
+    <!-- DPI -->
     <div class="dpi-box" id="dpiBox">
-      <div class="dpi-icon">📱</div>
       <div class="dpi-content">
-        <span>📲 DPI sugerido (Android)</span>
-        <strong id="dpiValue"></strong>
-        <p>Es una sugerencia orientativa. Comprueba la compatibilidad y anota tu valor original antes de cambiar los ajustes del sistema.</p>
+        <div class="dpi-icon">📱</div>
+        <div>
+          <span>📲 DPI sugerido (Android)</span>
+          <strong id="dpiValue"></strong>
+        </div>
       </div>
+      <p>Es una sugerencia orientativa. Comprueba la compatibilidad y anota tu valor original antes de cambiar los ajustes del sistema.</p>
     </div>
 
-    <p class="note">ⓘ Esta combinación se genera automáticamente. Pruébala en el campo de entrenamiento y ajusta los valores según tu pantalla, controles y comodidad.</p>
+    <p class="note">
+      🟢 Esta combinación se genera automáticamente. Pruébala en el campo de entrenamiento y ajusta los valores según tu pantalla, controles y comodidad.
+    </p>
+
     <button class="secondary-btn" id="again" type="button">↻ GENERAR OTRA SENSIBILIDAD</button>
     <button class="secondary-btn" id="copy" type="button">▣ COPIAR CONFIGURACIÓN</button>
+
   </section>
+
 </main>
 
 <footer>
@@ -691,44 +752,62 @@ const btnSiDpi = document.getElementById("btnSiDpi");
 
 function renderDevices() {
   const query = search.value.trim().toLowerCase();
-  const filtered = devicesList.filter(d => d.toLowerCase().includes(query));
+
+  const filtered = devicesList.filter(device =>
+    device.toLowerCase().includes(query)
+  );
 
   deviceList.innerHTML = "";
 
   if (filtered.length === 0) {
-    deviceList.innerHTML = '<p class="empty">No encontramos ese modelo. Intenta con otro nombre.</p>';
+    const empty = document.createElement("p");
+    empty.className = "empty";
+    empty.textContent = "No encontramos ese modelo. Intenta con otro nombre.";
+    deviceList.appendChild(empty);
     return;
-  }
-
-  if (!filtered.includes(selectedDevice)) {
-    selectedDevice = filtered[0];
   }
 
   filtered.slice(0, 30).forEach(device => {
     const btn = document.createElement("button");
+
     btn.type = "button";
     btn.className = "device" + (selectedDevice === device ? " active" : "");
-    btn.textContent = device;
-    btn.onclick = () => {
+    btn.textContent = "📱 " + device;
+
+    btn.addEventListener("click", () => {
       selectedDevice = device;
       renderDevices();
-    };
+    });
+
     deviceList.appendChild(btn);
   });
 }
 
-search.oninput = renderDevices;
+search.addEventListener("input", renderDevices);
 
-btnNoDpi.onclick = () => {
+btnNoDpi.addEventListener("click", () => {
   useDpi = false;
   btnNoDpi.classList.add("active");
   btnSiDpi.classList.remove("active");
-};
+});
 
-btnSiDpi.onclick = () => {
+btnSiDpi.addEventListener("click", () => {
   useDpi = true;
   btnSiDpi.classList.add("active");
   btnNoDpi.classList.remove("active");
-};
+});
 
-function randomInt(min, max
+function randomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function generate() {
+  const style = document.getElementById("style").value;
+
+  const ranges = {
+    Alta: [155, 200],
+    Media: [105, 165],
+    Baja: [65, 125]
+  };
+
+  const [min, max] = ranges[st
