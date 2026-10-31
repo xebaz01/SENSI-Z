@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#050807">
 <title>Sensi Z | Free Fire</title>
-<meta name="google-site-verification" content="ownDZZdlroDqaP84AZlTHk0AF0V5iZUKOKd8TN5MD7A" />
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap');
 
@@ -474,7 +474,6 @@ footer p {
       <input id="search" type="search" placeholder="Escribe el modelo de tu teléfono..." autocomplete="off">
     </div>
 
-    <!-- Contenedor con borde visible para asegurarnos de que se note la caja -->
     <div class="device-results" id="devices"></div>
 
     <div class="field-grid">
@@ -517,7 +516,7 @@ footer p {
     </div>
 
     <p class="note">
-      Esta combinación se genera aleatoriamente. Pruébala en el campo de entrenamiento y ajusta los valores según tu pantalla, controles y comodidad.
+      Esta combinación se genera automáticamente. Pruébala en el campo de entrenamiento y ajusta los valores según tu pantalla, controles y comodidad.
     </p>
 
     <button class="secondary-btn" id="again" type="button">↻ GENERAR OTRA SENSIBILIDAD</button>
@@ -633,7 +632,10 @@ function generate() {
     "Mira 2x": randomInt(min - 20, max - 12),
     "Mira 4x": randomInt(min - 35, max - 25),
     "Mira francotirador": randomInt(20, 100),
-    "Cámara libre": randomInt(min - 15, max)
+    "Cámara libre": randomInt(min - 15, max),
+
+    // NUEVO: BOTÓN DE DISPARO
+    "BOTÓN DE DISPARO": randomInt(45, 60)
   };
 
   document.getElementById("resultStyle").textContent = "ESTILO " + style.toUpperCase();
@@ -668,7 +670,7 @@ document.getElementById("again").onclick = generate;
 document.getElementById("copy").onclick = () => {
   const dev = document.getElementById("resultDevice").textContent;
   let text = `🔥 Sensi Z - Free Fire\n📱 Dispositivo: ${dev}\n`;
-  
+
   document.querySelectorAll(".sensi-card").forEach(card => {
     text += `- ${card.querySelector("span").textContent}: ${card.querySelector("strong").textContent}\n`;
   });
@@ -685,7 +687,6 @@ document.getElementById("copy").onclick = () => {
   });
 };
 
-// Ejecutar de inmediato al cargar para que aparezcan los celulares en pantalla
 renderDevices();
 </script>
 
